@@ -54,7 +54,7 @@
                                 @lang('crud.teams.inputs.coaches_id')
                             </th>
                             <th class="text-left">
-                                @lang('crud.teams.inputs.image')
+                                Logo
                             </th>
                             <th class="text-left">
                                 @lang('crud.teams.inputs.location')
@@ -66,9 +66,10 @@
                     </thead>
                     <tbody>
                         @forelse($allTeams as $teams)
+
                         <tr>
                             <td>{{ $teams->name ?? '-' }}</td>
-                            <td>{{ optional($teams->coaches)->id ?? '-' }}</td>
+                            <td>{{ $teams->coaches->user->name ?? '-' }}</td>
                             <td>
                                 <x-partials.thumbnail
                                     src="{{ $teams->image ? \Storage::url($teams->image) : '' }}"
