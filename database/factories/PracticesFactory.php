@@ -27,7 +27,7 @@ class PracticesFactory extends Factory
             'date' => $this->faker->date(),
             'start_time' => $this->faker->time(),
             'end_time' => $this->faker->time(),
-            'teams_id' => \App\Models\Teams::factory(),
+            'team_id' => \App\Models\Teams::factory(),
         ];
     }
 }

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,7 +13,7 @@ return new class extends Migration {
     {
         Schema::create('practices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('teams_id');
+            $table->unsignedBigInteger('team_id');
             $table->string('location');
             $table->date('date');
             $table->time('start_time');

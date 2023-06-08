@@ -51,7 +51,7 @@
                                 @lang('crud.players.inputs.user_id')
                             </th>
                             <th class="text-left">
-                                @lang('crud.players.inputs.teams_id')
+                                @lang('crud.players.inputs.team_id')
                             </th>
                             <th class="text-right">
                                 @lang('crud.players.inputs.jersey_number')

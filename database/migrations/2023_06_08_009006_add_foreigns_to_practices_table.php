@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,7 +13,7 @@ return new class extends Migration {
     {
         Schema::table('practices', function (Blueprint $table) {
             $table
-                ->foreign('teams_id')
+                ->foreign('team_id')
                 ->references('id')
                 ->on('teams')
                 ->onUpdate('CASCADE')
@@ -26,7 +27,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('practices', function (Blueprint $table) {
-            $table->dropForeign(['teams_id']);
+            $table->dropForeign(['team_id']);
         });
     }
 };

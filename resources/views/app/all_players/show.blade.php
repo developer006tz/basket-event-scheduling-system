@@ -17,7 +17,7 @@
                     <span>{{ optional($players->user)->name ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.players.inputs.teams_id')</h5>
+                    <h5>@lang('crud.players.inputs.team_id')</h5>
                     <span>{{ optional($players->teams)->name ?? '-' }}</span>
                 </div>
                 <div class="mb-4">

@@ -48,7 +48,7 @@
                     <thead>
                         <tr>
                             <th class="text-left">
-                                @lang('crud.practices.inputs.teams_id')
+                                @lang('crud.practices.inputs.team_id')
                             </th>
                             <th class="text-left">
                                 @lang('crud.practices.inputs.location')

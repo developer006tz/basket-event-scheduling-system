@@ -66,37 +66,43 @@ class GamesController extends Controller
         // Get all teams
         $teams = Teams::all();
 
-        // Generate bracket structure 
-        $bracket = [
-            [1 => null, 2 => null],
-            [3 => null, 4 => null]
-        ];
-
-        // Randomly assign teams to bracket 
-        for ($i = 0; $i < count($teams); $i++) {
-            $bracket[$i % 2][$i % 2 == 0 ? 1 : 2] = $teams[$i];
+        // Generate all possible matchups between teams
+        $matchups = [];
+        foreach ($teams as $homeTeam) {
+            foreach ($teams as $awayTeam) {
+                if ($homeTeam->id != $awayTeam->id) {
+                    $matchups[] = [$homeTeam, $awayTeam];
+                }
+            }
         }
 
         // Set game dates, spacing by 3 days 
         $gameDates = [];
-        for ($i = 0; $i < count($bracket) - 1; $i++) {
+        for ($i = 0; $i < count($matchups); $i++) {
             $gameDates[] = Carbon::now()->addDays(3 * $i)->format('Y-m-d');
         }
 
-       
-        // For each game date, set start time and save to Games table 
-        foreach ($gameDates as $date) {
-            $homeTeam = $bracket[0][1] ?? $bracket[1][1];
-            $awayTeam = $bracket[0][2] ?? $bracket[1][2];
+        // For each matchup, schedule two games (home and away)
+        foreach ($matchups as $i => $matchup) {
+            list($homeTeam, $awayTeam) = $matchup;
 
+            // Schedule home game
             Games::create([
                 'home_team_id' => $homeTeam->id,
                 'away_team_id' => $awayTeam->id,
                 'location' => $homeTeam->location,
-                'date' => $date,
+                'date' => $gameDates[$i],
                 'start_time' => Carbon::now()->addHours(rand(1, 5))->format('H:i:s')
             ]);
 
+            // Schedule away game
+            Games::create([
+                'home_team_id' => $awayTeam->id,
+                'away_team_id' => $homeTeam->id,
+                'location' => $awayTeam->location,
+                'date' => Carbon::parse($gameDates[$i])->addDays(3)->format('Y-m-d'),
+                'start_time' => Carbon::now()->addHours(rand(1, 5))->format('H:i:s')
+            ]);
         }
 
         // Schedule practices in between game dates for each team 
@@ -120,6 +126,7 @@ class GamesController extends Controller
             ->route('all-games.index')
             ->withSuccess(__('crud.common.created'));
     }
+
 
 
     /**

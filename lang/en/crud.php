@@ -43,7 +43,7 @@ return [
         'show_title' => 'Show Players',
         'inputs' => [
             'user_id' => 'User',
-            'teams_id' => 'Teams',
+            'team_id' => 'Teams',
             'jersey_number' => 'Jersey Number',
             'height' => 'Height',
             'weight' => 'Weight',
@@ -75,7 +75,7 @@ return [
         'edit_title' => 'Edit Practices',
         'show_title' => 'Show Practices',
         'inputs' => [
-            'teams_id' => 'Teams',
+            'team_id' => 'Teams',
             'location' => 'Location',
             'date' => 'Date',
             'start_time' => 'Start Time',

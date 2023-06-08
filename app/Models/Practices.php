@@ -12,7 +12,7 @@ class Practices extends Model
     use Searchable;
 
     protected $fillable = [
-        'teams_id',
+        'team_id',
         'location',
         'date',
         'start_time',

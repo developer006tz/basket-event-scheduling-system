@@ -20,7 +20,7 @@ class PracticesStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'teams_id' => ['required', 'exists:teams,id'],
+            'team_id' => ['required', 'exists:teams,id'],
             'location' => ['required', 'max:255', 'string'],
             'date' => ['required', 'date'],
             'start_time' => ['required', 'date_format:H:i:s'],

@@ -34,4 +34,14 @@ class Games extends Model
     {
         return $this->hasMany(EventStatistics::class);
     }
+
+    public function homeTeam()
+    {
+        return $this->belongsTo(Teams::class, 'home_team_id');
+    }
+
+    public function awayTeam()
+    {
+        return $this->belongsTo(Teams::class, 'away_team_id');
+    }
 }

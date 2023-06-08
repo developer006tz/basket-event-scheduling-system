@@ -13,7 +13,7 @@ class Players extends Model
 
     protected $fillable = [
         'user_id',
-        'teams_id',
+        'team_id',
         'jersey_number',
         'height',
         'weight',

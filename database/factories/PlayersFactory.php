@@ -27,7 +27,7 @@ class PlayersFactory extends Factory
             'height' => $this->faker->randomFloat(2, 0, 9999),
             'weight' => $this->faker->randomFloat(2, 0, 9999),
             'age' => $this->faker->randomNumber(0),
-            'teams_id' => \App\Models\Teams::factory(),
+            'team_id' => \App\Models\Teams::factory(),
             'user_id' => \App\Models\User::factory(),
         ];
     }

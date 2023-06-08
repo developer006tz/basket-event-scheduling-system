@@ -21,7 +21,7 @@ class PlayersStoreRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'exists:users,id'],
-            'teams_id' => ['required', 'exists:teams,id'],
+            'team_id' => ['required', 'exists:teams,id'],
             'jersey_number' => ['required', 'numeric'],
             'height' => ['required', 'numeric'],
             'weight' => ['required', 'numeric'],

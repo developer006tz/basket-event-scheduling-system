@@ -13,7 +13,7 @@
 
             <div class="mt-4">
                 <div class="mb-4">
-                    <h5>@lang('crud.practices.inputs.teams_id')</h5>
+                    <h5>@lang('crud.practices.inputs.team_id')</h5>
                     <span>{{ optional($practices->teams)->name ?? '-' }}</span>
                 </div>
                 <div class="mb-4">

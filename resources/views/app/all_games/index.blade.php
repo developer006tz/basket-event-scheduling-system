@@ -77,8 +77,8 @@
                     <tbody>
                         @forelse($allGames as $games)
                         <tr>
-                            <td>{{ $games->home_team_id ?? '-' }}</td>
-                            <td>{{ $games->away_team_id ?? '-' }}</td>
+                            <td>{{ $games->homeTeam->name ?? '-' }}</td>
+                            <td>{{ $games->awayTeam->name ?? '-' }}</td>
                             <td>{{ $games->location ?? '-' }}</td>
                             <td>{{ $games->date ?? '-' }}</td>
                             <td>{{ $games->start_time ?? '-' }}</td>
