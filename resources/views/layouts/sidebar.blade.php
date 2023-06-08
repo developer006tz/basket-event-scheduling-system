@@ -36,7 +36,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('all-teams.index') }}" class="nav-link">
                                     <i class="nav-icon icon ion-md-radio-button-off"></i>
-                                    <p>All Teams</p>
+                                    <p>Teams</p>
                                 </a>
                             </li>
                             @endcan
