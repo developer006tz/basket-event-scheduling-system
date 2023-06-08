@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Welcome to NIT BASKETBALL EVENT SCHEDULING SYSTEM') }}
                 </div>
             </div>
         </div>
