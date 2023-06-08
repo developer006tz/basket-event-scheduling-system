@@ -37,7 +37,7 @@ class TeamsController extends Controller
     {
         $this->authorize('create', Teams::class);
 
-        $allCoaches = Coaches::pluck('id', 'id');
+        $allCoaches = Coaches::join('users', 'users.id', '=', 'coaches.user_id')->pluck('users.name', 'coaches.id');
 
         return view('app.all_teams.create', compact('allCoaches'));
     }
