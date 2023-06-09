@@ -27,7 +27,7 @@ class GamesController extends Controller
 
         $allGames = Games::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(100)
             ->withQueryString();
 
         return view('app.all_games.index', compact('allGames', 'search'));
