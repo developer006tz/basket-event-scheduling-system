@@ -4,8 +4,8 @@
 <div class="container">
     <div class="searchbar mt-0 mb-4">
         <div class="row d-flex justify-content-left">
-             <div class="col-md-6"></div>
-            <div class="col-md-6 text-right">
+             <div class="col-md-6"><h2>Coaches</h2></div>
+            <div class="col-md-6 text-right d-flex justify-content-end">
                 @can('create', App\Models\Coaches::class)
                 <a
                     href="{{ route('all-coaches.create') }}"
@@ -20,12 +20,10 @@
 
     <div class="card">
         <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.coaches.index_title')</h4>
-            </div>
-
             <div class="table-responsive">
-                <table class="table table-borderless table-hover">
+                <table id="example"
+                    class="table table-striped data-table"
+                    style="width: 100%">
                     <thead>
                         <tr>
                             <th class="text-left">
@@ -52,7 +50,7 @@
                                     >
                                         <button
                                             type="button"
-                                            class="btn btn-light"
+                                            class="btn btn-primary"
                                         >
                                             <i class="icon ion-md-create"></i>
                                         </button>
@@ -63,7 +61,7 @@
                                     >
                                         <button
                                             type="button"
-                                            class="btn btn-light"
+                                            class="btn btn-success mx-3"
                                         >
                                             <i class="icon ion-md-eye"></i>
                                         </button>
@@ -77,7 +75,7 @@
                                         @csrf @method('DELETE')
                                         <button
                                             type="submit"
-                                            class="btn btn-light text-danger"
+                                            class="btn btn-danger text-light"
                                         >
                                             <i class="icon ion-md-trash"></i>
                                         </button>

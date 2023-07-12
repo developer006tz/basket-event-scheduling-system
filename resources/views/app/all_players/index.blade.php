@@ -21,7 +21,9 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-borderless table-hover">
+                <table id="example"
+                    class="table table-striped data-table"
+                    style="width: 100%">
                     <thead>
                         <tr>
                             <th class="text-left">
@@ -70,7 +72,7 @@
                                     >
                                         <button
                                             type="button"
-                                            class="btn btn-light"
+                                            class="btn btn-primary"
                                         >
                                             <i class="icon ion-md-create"></i>
                                         </button>
@@ -81,7 +83,7 @@
                                     >
                                         <button
                                             type="button"
-                                            class="btn btn-light"
+                                            class="btn btn-success mx-3"
                                         >
                                             <i class="icon ion-md-eye"></i>
                                         </button>
@@ -95,7 +97,7 @@
                                         @csrf @method('DELETE')
                                         <button
                                             type="submit"
-                                            class="btn btn-light text-danger"
+                                            class="btn btn-danger text-light"
                                         >
                                             <i class="icon ion-md-trash"></i>
                                         </button>
