@@ -57,7 +57,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-md-6 mb-3">
             <div class="card h-100">
               <div class="card-header">
@@ -80,12 +80,12 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
         <div class="row">
           <div class="col-md-12 mb-3">
             <div class="card">
               <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Data Table
+                <span><i class="bi bi-table me-2"></i></span>Latest games ( Fixture )
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -96,33 +96,32 @@
                   >
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Home team</th>
+                        <th>Away Team</th>
+                        <th>Arena</th>
+                        <th>Result</th>
                       </tr>
                     </thead>
                     <tbody>
-                      
+                      @forelse($games as $game)
                       <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>27</td>
-                        <td>2011/01/25</td>
-                        <td>$112,000</td>
+                        <td> {{$game->homeTeam->name ?? '-'}} </td>
+                        <td>{{$game->awayTeam->name ?? '-'}} </td>
+                        <td>{{$game->location ?? '-'}} </td>
+                        <td>-no-result </td>
                       </tr>
+                      @empty
+                      <tr>
+                        <td colspan="4">No games yet</td>
+                      </tr>
+                      @endforelse
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Home team</th>
+                        <th>Away Team</th>
+                        <th>Arena</th>
+                        <th>Result</th>
                       </tr>
                     </tfoot>
                   </table>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Coaches;
 use App\Models\Players;
 use App\Models\Teams;
+use App\Models\Games;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,7 @@ class HomeController extends Controller
         $coaches = Coaches::all();
         $players = Players::all();
         $teams = Teams::all();
-        return view('home',compact('users','coaches','players','teams'));
+        $games = Games::all();
+        return view('home',compact('users','coaches','players','teams','games'));
     }
 }
