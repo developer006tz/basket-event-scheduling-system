@@ -20,7 +20,12 @@ class PlayersStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'exists:users,id'],
+            'name' => ['required', 'max:255', 'string'],
+            'email' => ['required', 'unique:users,email', 'email'],
+            'phone' => ['nullable', 'max:255', 'string'],
+            'maritial_status' => ['nullable', 'in:single,maried'],
+            'address' => ['nullable', 'max:255', 'string'],
+            'password' => ['required'],
             'team_id' => ['required', 'exists:teams,id'],
             'jersey_number' => ['required', 'numeric'],
             'height' => ['required', 'numeric'],

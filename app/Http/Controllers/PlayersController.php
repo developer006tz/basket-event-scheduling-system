@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PlayersStoreRequest;
 use App\Http\Requests\PlayersUpdateRequest;
+use Illuminate\Support\Facades\Hash;
 
 class PlayersController extends Controller
 {
@@ -53,11 +54,29 @@ class PlayersController extends Controller
         $this->authorize('create', Players::class);
 
         $validated = $request->validated();
+        $user = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'phone' => validatePhoneNumber($validated['phone']),
+            'address' => $validated['address'],
+            'maritial_status' => $validated['maritial_status'],
+        ];
+        $user = User::create($user);
+        $user->syncRoles(Role::findByName('player'));
 
-        $players = Players::create($validated);
+        $player = [
+            'user_id' => $user->id,
+            'team_id' => $validated['team_id'],
+            'jersey_number' => $validated['jersey_number'],
+            'height' => $validated['height'],
+            'weight' => $validated['weight'],
+            'age' => $validated['age'],
 
-        return redirect()
-            ->route('all-players.edit', $players)
+        ];
+        $players = Players::create($player);
+
+        return to_route('all-players.edit', $players)
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -78,12 +97,17 @@ class PlayersController extends Controller
     {
         $this->authorize('update', $players);
 
-        $users = User::pluck('name', 'id');
+        $user = User::find($players->user_id);
         $allTeams = Teams::pluck('name', 'id');
+
+
+    //    $test = $players->load(['user', 'teams']);
+       
+
 
         return view(
             'app.all_players.edit',
-            compact('players', 'users', 'allTeams')
+            compact('players', 'user', 'allTeams')
         );
     }
 

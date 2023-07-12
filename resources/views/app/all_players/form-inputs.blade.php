@@ -66,40 +66,14 @@
         ></x-inputs.password>
     </x-inputs.group>
 
-    <div class="form-group col-sm-12 mt-4">
-        <h4>Assign @lang('crud.roles.name')</h4>
-
-        @foreach ($roles as $role)
-        <div>
-            <x-inputs.checkbox
-                id="role{{ $role->id }}"
-                name="roles[]"
-                label="{{ ucfirst($role->name) }}"
-                value="{{ $role->id }}"
-                :checked="isset($user) ? $user->hasRole($role) : false"
-                :add-hidden-value="false"
-            ></x-inputs.checkbox>
-        </div>
-        @endforeach
-    </div>
-
         </div>
 
     </div>
     <div class="col-sm-6">
 <div class="row">
-    <x-inputs.group class="col-sm-12">
-        <x-inputs.select name="user_id" label="User" required>
-            @php $selected = old('user_id', ($editing ? $players->user_id : '')) @endphp
-            <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the User</option>
-            @foreach($users as $value => $label)
-            <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }} >{{ $label }}</option>
-            @endforeach
-        </x-inputs.select>
-    </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12">
-        <x-inputs.select name="team_id" label="Teams" required>
+    <x-inputs.group class="col-sm-12 mb-2">
+        <x-inputs.select name="team_id" label="Player Team" required>
             @php $selected = old('team_id', ($editing ? $players->team_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Teams</option>
             @foreach($allTeams as $value => $label)
@@ -108,7 +82,7 @@
         </x-inputs.select>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12">
+    <x-inputs.group class="col-sm-12 mb-2">
         <x-inputs.number
             name="jersey_number"
             label="Jersey Number"
@@ -119,10 +93,10 @@
         ></x-inputs.number>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12">
+    <x-inputs.group class="col-sm-12 mb-2">
         <x-inputs.number
             name="height"
-            label="Height"
+            label="Height in (ft)"
             :value="old('height', ($editing ? $players->height : ''))"
             max="255"
             step="0.01"
@@ -131,10 +105,10 @@
         ></x-inputs.number>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12">
+    <x-inputs.group class="col-sm-12 mb-2">
         <x-inputs.number
             name="weight"
-            label="Weight"
+            label="Weight in (kg)"
             :value="old('weight', ($editing ? $players->weight : ''))"
             max="255"
             step="0.01"
@@ -146,7 +120,7 @@
     <x-inputs.group class="col-sm-12">
         <x-inputs.number
             name="age"
-            label="Age"
+            label="Age in (yrs)"
             :value="old('age', ($editing ? $players->age : ''))"
             max="255"
             placeholder="Age"

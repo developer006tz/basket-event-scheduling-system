@@ -93,6 +93,14 @@
               </a>
             </li>
             @endcan
+            @can('view-any', App\Models\Practices::class)
+            <li>
+              <a href="{{ route('all-practices.index') }}" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-chevron-bar-contract"></i></span>
+                <span>Practises</span>
+              </a>
+            </li>
+            @endcan
 
 
             <li>
