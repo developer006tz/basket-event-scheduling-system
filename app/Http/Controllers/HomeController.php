@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Coaches;
+use App\Models\Players;
+use App\Models\Teams;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::all();
+        $coaches = Coaches::all();
+        $players = Players::all();
+        $teams = Teams::all();
+        return view('home',compact('users','coaches','players','teams'));
     }
 }

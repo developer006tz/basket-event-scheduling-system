@@ -38,6 +38,12 @@ class User extends Authenticatable
         return $this->hasMany(Coaches::class);
     }
 
+    public function countCoaches()
+    {
+        return $this->allCoaches()->count();
+    }
+
+
     public function allPlayers()
     {
         return $this->hasMany(Players::class);

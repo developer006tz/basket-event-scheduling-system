@@ -8,7 +8,7 @@
                 <a href="{{ route('all-players.index') }}" class="mr-4"
                     ><i class="icon ion-md-arrow-back"></i
                 ></a>
-                @lang('crud.players.show_title')
+                players
             </h4>
 
             <div class="mt-4">
