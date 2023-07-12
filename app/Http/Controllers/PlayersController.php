@@ -76,7 +76,7 @@ class PlayersController extends Controller
         ];
         $players = Players::create($player);
 
-        return to_route('all-players.edit', $players)
+        return to_route('all-players.index', $players)
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -106,7 +106,7 @@ class PlayersController extends Controller
 
 
         return view(
-            'app.all_players.edit',
+            'app.all_players.index',
             compact('players', 'user', 'allTeams')
         );
     }

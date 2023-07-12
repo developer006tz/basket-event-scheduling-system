@@ -67,16 +67,17 @@ a.disabled {
     <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/js/dataTables.bootstrap5.min.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
+     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     @stack('scripts')
      @if (session()->has('success')) 
         <script>
-            var notyf = new Notyf({dismissible: true})
+            var notyf = new Notyf({dismissible: true , duration: 3000, position: {x: 'right', y: 'top'}, types: [ { type: 'success', background: '#00b894', icon: { className: 'fas fa-check', tagName: 'span', color: '#fff' }, dismissible: true, duration: 3000, } ]})
             notyf.success('{{ session('success') }}')
         </script> 
         @endif
          @if (session()->has('error')) 
         <script>
-            var notyf = new Notyf({dismissible: true})
+            var notyf = new Notyf({dismissible: true, duration: 3000, position: {x: 'right', y: 'top'}, types: [ { type: 'error', background: '#ff7675', icon: { className: 'fas fa-times', tagName: 'span', color: '#fff' }, dismissible: true, duration: 3000, } ]})
             notyf.error('{{ session('error') }}')
         </script> 
         @endif
