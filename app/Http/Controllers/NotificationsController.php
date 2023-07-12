@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Games;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use App\Models\Practices;
 use App\Models\EventTypes;
 use Illuminate\Http\Request;

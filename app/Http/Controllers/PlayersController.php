@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Teams;
 use App\Models\Players;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PlayersStoreRequest;
@@ -39,8 +40,9 @@ class PlayersController extends Controller
 
         $users = User::pluck('name', 'id');
         $allTeams = Teams::pluck('name', 'id');
+        $roles = Role::get();
 
-        return view('app.all_players.create', compact('users', 'allTeams'));
+        return view('app.all_players.create', compact('users', 'allTeams', 'roles'));
     }
 
     /**

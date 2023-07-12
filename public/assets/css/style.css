@@ -3,9 +3,15 @@ body,
 button {
   font-family: "Inter", sans-serif;
 }
+
+body{
+  background: #a5a5a500;
+}
 :root {
   --offcanvas-width: 270px;
   --topNavbarHeight: 56px;
+      background: #b1b1b1;
+  
   
 }
 .link{

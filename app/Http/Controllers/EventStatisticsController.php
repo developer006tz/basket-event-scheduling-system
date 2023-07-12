@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Games;
 use App\Models\Players;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\EventStatistics;
 use Illuminate\Http\RedirectResponse;

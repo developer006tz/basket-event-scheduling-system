@@ -10,11 +10,47 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+        
+        <!-- Icons -->
+        <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
     <title>Basket</title>
   </head>
+  <style>
+    #loader {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+    #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+
+    
+}
+
+a.disabled {
+    pointer-events: none;
+    color: #6c757d;
+}
+  </style>
   <body>
+    <div id="overlay" ></div>
+        
+        <div id="loader">
+            <img src="{{asset('loader.gif')}}" width="300" height="300" alt="Loading...">
+        </div>
     @include('layouts.nav')
     @include('layouts.sidebar')
 
@@ -73,5 +109,24 @@
                 })
             })
         </script>
+         <script>
+              $(document).ready(function() {
+
+              $('#loader, #overlay').show();
+
+              $(window).on('load', function() {
+                  $('#loader, #overlay').hide();
+              });
+
+              setTimeout(function() {
+                  $('#loader, #overlay').hide();
+              }, 5000);
+
+              $('#update-form').on('submit', function(event) {
+                  $('#loader, #overlay').show();
+              });
+          });
+
+  </script>
   </body>
 </html>

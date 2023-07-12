@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use App\Models\EventTypes;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\EventTypesStoreRequest;
 use App\Http\Requests\EventTypesUpdateRequest;
+
 
 class EventTypesController extends Controller
 {

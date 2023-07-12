@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Teams;
 use App\Models\Practices;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PracticesStoreRequest;
