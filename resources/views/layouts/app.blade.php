@@ -16,6 +16,7 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
+            <script src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
     <title>Basket</title>
   </head>
   <style>

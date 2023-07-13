@@ -24,6 +24,9 @@
                     style="width: 100%">
                     <thead>
                         <tr>
+                            <th>
+                                image
+                            </th>
                             <th class="text-left">
                                 @lang('crud.users.inputs.name')
                             </th>
@@ -47,6 +50,10 @@
                     <tbody>
                         @forelse($users as $user)
                         <tr>
+                            <td> <x-partials.thumbnail
+                        src="{{ $user->image ? url(\Storage::url($user->image)) : asset('avatar.svg') }}"
+                        size="150"
+                    /></td>
                             <td>{{ $user->name ?? '-' }}</td>
                             <td>{{ $user->email ?? '-' }}</td>
                             <td>{{ $user->phone ?? '-' }}</td>

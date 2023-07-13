@@ -17,6 +17,8 @@ class Games extends Model
         'location',
         'date',
         'start_time',
+        'result',
+        'result_status',
     ];
 
     protected $searchableFields = ['*'];

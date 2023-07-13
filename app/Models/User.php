@@ -22,6 +22,7 @@ class User extends Authenticatable
         'phone',
         'maritial_status',
         'address',
+        'image',
         'password',
     ];
 

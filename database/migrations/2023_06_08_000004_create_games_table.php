@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->string('location');
             $table->date('date');
             $table->time('start_time');
+            $table->string('result')->nullable();
+            $table->enum('result_status', ['1', '3', '2'])->nullable();
 
             $table->timestamps();
         });

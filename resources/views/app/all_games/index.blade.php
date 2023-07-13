@@ -48,6 +48,12 @@
                             <th class="text-left">
                                 @lang('crud.games.inputs.start_time')
                             </th>
+                             <th class="text-left">
+                                @lang('crud.all_games.inputs.result')
+                            </th>
+                            <th class="text-left">
+                                @lang('crud.all_games.inputs.result_status')
+                            </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
                             </th>
@@ -61,6 +67,8 @@
                             <td>{{ $games->location ?? '-' }}</td>
                             <td>{{ $games->date ?? '-' }}</td>
                             <td>{{ $games->start_time ?? '-' }}</td>
+                            <td>{{ $games->result ?? '-' }}</td>
+                            <td>{{ $games->result_status ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"

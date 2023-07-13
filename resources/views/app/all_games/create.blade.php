@@ -8,7 +8,7 @@
                 <a href="{{ route('all-games.index') }}" class="mr-4"
                     ><i class="icon ion-md-arrow-back"></i
                 ></a>
-                @lang('crud.games.create_title')
+                @lang('crud.all_games.create_title')
             </h4>
 
             <x-form

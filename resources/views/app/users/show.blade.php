@@ -32,6 +32,13 @@
                     <h5>@lang('crud.users.inputs.address')</h5>
                     <span>{{ $user->address ?? '-' }}</span>
                 </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.users.inputs.image')</h5>
+                    <x-partials.thumbnail
+                        src="{{ $user->image ? url(\Storage::url($user->image)) : '' }}"
+                        size="150"
+                    />
+                </div>
             </div>
 
             <div class="mt-4">

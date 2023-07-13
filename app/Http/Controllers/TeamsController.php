@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TeamsStoreRequest;
 use App\Http\Requests\TeamsUpdateRequest;
+use Intervention\Image\Facades\Image;
 
 class TeamsController extends Controller
 {

@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PlayersStoreRequest;
 use App\Http\Requests\PlayersUpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class PlayersController extends Controller
 {
@@ -62,7 +63,19 @@ class PlayersController extends Controller
             'address' => $validated['address'],
             'maritial_status' => $validated['maritial_status'],
         ];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . rand(999, 9999999) . '.jpg';
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(800, 800);
+            $image_resize->encode('jpg', 90);
+            $image_resize->save(storage_path('app/public/' . $filename));
+            $user['image'] = $filename;
+        }
+
         $user = User::create($user);
+
         $user->syncRoles(Role::findByName('player'));
 
         $player = [
@@ -106,7 +119,7 @@ class PlayersController extends Controller
 
 
         return view(
-            'app.all_players.index',
+            'app.all_players.edit',
             compact('players', 'user', 'allTeams')
         );
     }
@@ -121,6 +134,25 @@ class PlayersController extends Controller
         $this->authorize('update', $players);
 
         $validated = $request->validated();
+
+        $user = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'phone' => validatePhoneNumber($validated['phone']),
+            'address' => $validated['address'],
+            'maritial_status' => $validated['maritial_status'],
+        ];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . rand(999, 9999999) . '.jpg';
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(800, 800);
+            $image_resize->encode('jpg', 90);
+            $image_resize->save(storage_path('app/public/' . $filename));
+            $user['image'] = $filename;
+        }
 
         $players->update($validated);
 

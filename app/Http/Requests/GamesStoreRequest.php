@@ -25,6 +25,8 @@ class GamesStoreRequest extends FormRequest
             'location' => ['required', 'max:255', 'string'],
             'date' => ['required', 'date'],
             'start_time' => ['required', 'date_format:H:i:s'],
+            'result' => ['nullable', 'max:255', 'string'],
+            'result_status' => ['nullable', 'in:1,3,2'],
         ];
     }
 }

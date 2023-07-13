@@ -64,6 +64,8 @@ return [
             'location' => 'Location',
             'date' => 'Date',
             'start_time' => 'Start Time',
+            'result' => 'Result',
+            'result_status' => 'Result Status',
         ],
     ],
 

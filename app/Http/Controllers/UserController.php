@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -52,6 +53,15 @@ class UserController extends Controller
         $validated = $request->validated();
 
         $validated['password'] = Hash::make($validated['password']);
+           if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . rand(999, 9999999) . '.jpg';
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->resize(200, 200);
+                $image_resize->encode('jpg', 80);
+                $image_resize->save(storage_path('app/public/' . $filename));
+                $validated['image'] = $filename;
+            }
 
         $user = User::create($validated);
 

@@ -14,6 +14,7 @@
             <x-form
                 method="PUT"
                 action="{{ route('users.update', $user) }}"
+                has-files
                 class="mt-4"
             >
                 @include('app.users.form-inputs')

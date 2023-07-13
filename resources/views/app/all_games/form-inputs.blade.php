@@ -54,4 +54,23 @@
             required
         ></x-inputs.text>
     </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12">
+        <x-inputs.text
+            name="result"
+            label="Result"
+            :value="old('result', ($editing ? $games->result : ''))"
+            maxlength="255"
+            placeholder="Result"
+        ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12">
+        <x-inputs.select name="result_status" label="Result Status">
+            @php $selected = old('result_status', ($editing ? $games->result_status : '')) @endphp
+            <option value="1" {{ $selected == '1' ? 'selected' : '' }} >1</option>
+            <option value="3" {{ $selected == '3' ? 'selected' : '' }} >3</option>
+            <option value="2" {{ $selected == '2' ? 'selected' : '' }} >2</option>
+        </x-inputs.select>
+    </x-inputs.group>
 </div>

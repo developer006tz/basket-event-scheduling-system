@@ -12,14 +12,14 @@ return new class extends Migration {
     {
         Schema::table('games', function (Blueprint $table) {
             $table
-                ->foreign('home_team_id', 'home_team_id _fk')
+                ->foreign('home_team_id')
                 ->references('id')
                 ->on('teams')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
 
             $table
-                ->foreign('away_team_id', 'away_team_id _fk')
+                ->foreign('away_team_id')
                 ->references('id')
                 ->on('teams')
                 ->onUpdate('CASCADE')

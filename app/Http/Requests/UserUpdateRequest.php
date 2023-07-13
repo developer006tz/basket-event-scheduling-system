@@ -30,6 +30,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => ['nullable', 'max:255', 'string'],
             'maritial_status' => ['nullable', 'in:single,maried'],
             'address' => ['nullable', 'max:255', 'string'],
+            'image' => ['nullable', 'image', 'max:1024'],
             'password' => ['nullable'],
             'roles' => 'array',
         ];
