@@ -32,15 +32,7 @@
                     style="width: 100%">
                     <thead>
                         <tr>
-                            <th class="text-left">
-                                @lang('crud.notifications.inputs.games_id')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.notifications.inputs.practices_id')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.notifications.inputs.event_types_id')
-                            </th>
+                            
                             <th class="text-left">
                                 @lang('crud.notifications.inputs.title')
                             </th>

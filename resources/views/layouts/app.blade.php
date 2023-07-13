@@ -50,7 +50,7 @@ a.disabled {
     <div id="overlay" ></div>
         
         <div id="loader">
-            <img src="{{asset('loader.gif')}}" width="300" height="300" alt="Loading...">
+            <img src="{{asset('loader2.gif')}}" width="300" height="300" alt="Loading...">
         </div>
     @include('layouts.nav')
     @include('layouts.sidebar')
