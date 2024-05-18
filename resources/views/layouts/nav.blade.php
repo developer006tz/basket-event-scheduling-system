@@ -13,7 +13,7 @@
         <a
           class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
           href="#"
-          >NIT BASKET ESS</a
+          >MoCU SPORTS AND GAME SCHEDULING MANAGEMENT SYSTEM</a
         >
         <button
           class="navbar-toggler"

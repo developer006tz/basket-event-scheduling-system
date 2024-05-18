@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
             <script src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
-    <title>Basket</title>
+    <title>MoCU sports and events management system</title>
   </head>
   <style>
     #loader {
@@ -50,7 +50,7 @@ a.disabled {
     <div id="overlay" ></div>
         
         <div id="loader">
-            <img src="{{asset('loader2.gif')}}" width="300" height="300" alt="Loading...">
+            <img src="{{asset('assets/images/mocu.webp')}}" width="300" height="300" alt="Loading...">
         </div>
     @include('layouts.nav')
     @include('layouts.sidebar')

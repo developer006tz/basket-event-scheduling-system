@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             ]);
         $this->call(PermissionsSeeder::class);
 
-        $this->call(CoachesSeeder::class);
+        /*$this->call(CoachesSeeder::class);
         $this->call(EventStatisticsSeeder::class);
         $this->call(EventTypesSeeder::class);
         $this->call(GamesSeeder::class);
@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlayersSeeder::class);
         $this->call(PracticesSeeder::class);
         $this->call(TeamsSeeder::class);
-        $this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);*/
     }
 }
