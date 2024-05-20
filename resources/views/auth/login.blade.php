@@ -7,7 +7,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
-        <title>basket</title>
+        <title>MoCU sports and events management system</title>
         
         <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <style>
         body {
-    background: url('https://cdn.vox-cdn.com/thumbor/kdanoMwN4jjvHDp-3W9Nnr9aMGA=/0x0:4116x2744/920x613/filters:focal(1729x1043:2387x1701):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/60574353/usa-today-8338790.0.0.0.jpg') no-repeat fixed center center;
+    background: url('/assets/images/basket.webp') no-repeat fixed center center;
     background-size: cover;
     font-family: Montserrat;
 }
