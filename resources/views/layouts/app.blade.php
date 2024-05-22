@@ -113,7 +113,7 @@
             // Fallback in case the window load event does not fire
             setTimeout(function() {
                 $('#loader, #overlay').hide();
-            }, 5000);
+            }, 2000);
 
             $('#update-form').on('submit', function(event) {
                 $('#loader, #overlay').show();
