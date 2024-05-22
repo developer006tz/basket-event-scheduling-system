@@ -63,7 +63,7 @@ class EventStatisticsController extends Controller
         $eventStatistics = EventStatistics::create($validated);
 
         return redirect()
-            ->route('all-event-statistics.edit', $eventStatistics)
+            ->route('all-event-statistics.index', $eventStatistics)
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -114,7 +114,7 @@ class EventStatisticsController extends Controller
         $eventStatistics->update($validated);
 
         return redirect()
-            ->route('all-event-statistics.edit', $eventStatistics)
+            ->route('all-event-statistics.index', $eventStatistics)
             ->withSuccess(__('crud.common.saved'));
     }
 

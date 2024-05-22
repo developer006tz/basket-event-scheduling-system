@@ -157,7 +157,7 @@ class PlayersController extends Controller
         $players->update($validated);
 
         return redirect()
-            ->route('all-players.edit', $players)
+            ->route('all-players.index', $players)
             ->withSuccess(__('crud.common.saved'));
     }
 

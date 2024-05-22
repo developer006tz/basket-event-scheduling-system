@@ -59,7 +59,7 @@ class TeamsController extends Controller
         $teams = Teams::create($validated);
 
         return redirect()
-            ->route('all-teams.edit', $teams)
+            ->route('all-teams.index', $teams)
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -106,7 +106,7 @@ class TeamsController extends Controller
         $teams->update($validated);
 
         return redirect()
-            ->route('all-teams.edit', $teams)
+            ->route('all-teams.index', $teams)
             ->withSuccess(__('crud.common.saved'));
     }
 

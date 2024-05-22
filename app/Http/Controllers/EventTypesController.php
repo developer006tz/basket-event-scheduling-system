@@ -55,7 +55,7 @@ class EventTypesController extends Controller
         $eventTypes = EventTypes::create($validated);
 
         return redirect()
-            ->route('all-event-types.edit', $eventTypes)
+            ->route('all-event-types.index', $eventTypes)
             ->withSuccess(__('crud.common.created'));
     }
 

@@ -54,7 +54,7 @@ class CoachesController extends Controller
         $coaches = Coaches::create($validated);
 
         return redirect()
-            ->route('all-coaches.edit', $coaches)
+            ->route('all-coaches.index', $coaches)
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -94,7 +94,7 @@ class CoachesController extends Controller
         $coaches->update($validated);
 
         return redirect()
-            ->route('all-coaches.edit', $coaches)
+            ->route('all-coaches.index', $coaches)
             ->withSuccess(__('crud.common.saved'));
     }
 
