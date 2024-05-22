@@ -39,9 +39,9 @@
         color: #6c757d;
     }
   </style>
-  <body x-data="{ loading: true }" x-init="window.onload = () => { loading = false }">
-    <div id="overlay" x-show="loading" x-cloak></div>
-    <div id="loader" x-show="loading" x-cloak>
+  <body>
+    <div id="overlay"></div>
+    <div id="loader">
         <img src="{{asset('assets/images/mocu.webp')}}" width="300" height="300" alt="Loading...">
     </div>
     @include('layouts.nav')
@@ -101,6 +101,24 @@
                 }
             })
         })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#loader, #overlay').show();
+
+            $(window).on('load', function() {
+                $('#loader, #overlay').hide();
+            });
+
+            // Fallback in case the window load event does not fire
+            setTimeout(function() {
+                $('#loader, #overlay').hide();
+            }, 5000);
+
+            $('#update-form').on('submit', function(event) {
+                $('#loader, #overlay').show();
+            });
+        });
     </script>
   </body>
 </html>
