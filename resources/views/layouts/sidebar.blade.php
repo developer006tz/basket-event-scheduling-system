@@ -40,6 +40,14 @@
               </a>
               <div class="collapse" id="layouts">
                 <ul class="navbar-nav ps-3">
+                  @can('view-any', App\Models\Teams::class)
+                  <li>
+                  <a href="{{ route('all-teams.index') }}" class="nav-link px-3">
+                  <span class="me-2"><i class="bi bi-person-lines-fill"></i></span>
+                  <span>Teams</span>
+                  </a>
+                  </li>
+                @endcan
                   @can('view-any', App\Models\Players::class)
                   <li>
                     <a href="{{ route('all-players.index') }}" class="nav-link px-3">
@@ -142,8 +150,10 @@
                 </ul>
               </div>
             </li>
-             @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) || 
-                    Auth::user()->can('view-any', Spatie\Permission\Models\Permission::class))
+             @if (
+  Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) ||
+  Auth::user()->can('view-any', Spatie\Permission\Models\Permission::class)
+)
 
             <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
             <li>
