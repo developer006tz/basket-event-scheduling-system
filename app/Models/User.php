@@ -14,7 +14,6 @@ class User extends Authenticatable
     use HasRoles;
     use Notifiable;
     use HasFactory;
-    use Searchable;
 
     protected $fillable = [
         'name',
@@ -34,21 +33,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function allCoaches()
-    {
-        return $this->hasMany(Coaches::class);
-    }
-
-    public function countCoaches()
-    {
-        return $this->allCoaches()->count();
-    }
-
-
-    public function allPlayers()
-    {
-        return $this->hasMany(Players::class);
-    }
 
     public function isSuperAdmin(): bool
     {
