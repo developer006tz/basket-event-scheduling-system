@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('footbal_venues', function (Blueprint $table) {
+        Schema::create('BasketVenues', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('capacity')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('footbal_venues');
+        Schema::dropIfExists('BasketVenues');
     }
 };

@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('footbal_tournament_statistics', function (Blueprint $table) {
+        Schema::create('FootbalTournamentStatistics', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tournament_id');
+            $table->unsignedBigInteger('team_id');
+            $table->unsignedBigInteger('game_id');
+            $table->integer('goals_scored')->nullable();
+            $table->integer('goals_conceded')->nullable();
+            $table->enum('game_status', ['scheduled', 'ongoing', 'completed', 'canceled'])->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('footbal_tournament_statistics');
+        Schema::dropIfExists('FootbalTournamentStatistics');
     }
 };
