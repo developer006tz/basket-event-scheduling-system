@@ -11,16 +11,18 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('basket_games', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->foreignId('home_team_id');
             $table->foreignId('away_team_id');
-            $table->string('location');
+            $table->integer('venue');
             $table->date('date');
             $table->time('start_time');
-            $table->string('result')->nullable();
-            $table->enum('result_status', ['1', '3', '2'])->nullable();
-
+            $table->int('home_score')->nullable();
+            $table->int('away_score')->nullable();
+            $table->foreign('tournament_id')->references('id')->on('BasketTournament');
+            $table->foreign('win_team_id')->references('id')->on('BasketTeam');
             $table->timestamps();
+
         });
     }
 
