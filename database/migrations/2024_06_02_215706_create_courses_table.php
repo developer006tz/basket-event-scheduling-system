@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('BasketTournamentPlayerStatistics', function (Blueprint $table) {
+        Schema::create('Course', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tournament_id');
-            $table->unsignedBigInteger('player_id');
-            $table->integer('goals');
-            $table->integer('assist');
-            $table->integer('yellow_card');
-            $table->integer('red_card');
+            $table->string('name');
+            $table->string('level')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('BasketTournamentPlayerStatistics');
+        Schema::dropIfExists('courses');
     }
 };

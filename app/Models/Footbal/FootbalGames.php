@@ -13,10 +13,11 @@ class FootbalGames extends Model
     protected $fillable = [
         'home_team_id',
         'away_team_id',
-        'venue',
+        'venue_id',
         'date',
         'start_time',
-        'result',
+        'home_score',
+        'away_score',
         'win_team_id',
         'tournament_id'
     ];

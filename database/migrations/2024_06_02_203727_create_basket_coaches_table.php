@@ -13,8 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('basket_coaches', function (Blueprint $table) {
+        Schema::create('BasketCoach', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('image')->nullable();
+            $table->string('password')->nullable();
+            $table->unsignedBigInteger('course_id')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('basket_coaches');
+        Schema::dropIfExists('BasketCoach');
     }
 };
