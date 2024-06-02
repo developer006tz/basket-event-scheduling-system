@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NetballCoach extends Model
 {
     use HasFactory;
-    protected $table = 'FootbalCoach';
+    protected $table = 'NetballCoach';
     protected $fillable = ['name', 'email', 'image', 'phone','course_id','password','team_id'];
 }

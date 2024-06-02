@@ -13,8 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('netball_players', function (Blueprint $table) {
+        Schema::create('NetballPlayer', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('age');
+            $table->string('password')->nullable();
+            $table->string('photo')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('netball_players');
+        Schema::dropIfExists('NetballPlayer');
     }
 };

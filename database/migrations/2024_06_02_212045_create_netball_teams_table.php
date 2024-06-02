@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('netball_teams', function (Blueprint $table) {
-            $table->id();
+        Schema::create('NetballTeam', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('name');
+            $table->string('short_name')->nullable();
+            $table->unsignedBigInteger('coach_id');
+            $table->string('badge')->nullable();
+            $table->string('venue');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('netball_teams');
+        Schema::dropIfExists('NetballTeam');
     }
 };
