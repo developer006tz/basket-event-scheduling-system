@@ -10,5 +10,5 @@ class BasketPlayer extends Model
     use HasFactory;
     protected $table = 'BasketPlayer';
 
-    protected $fillable = ['basket_team_id','course_id','photo','name','phone','age','email','password'];
+    protected $fillable = ['team_id','course_id','photo','name','phone','age','email','password'];
 }
