@@ -224,9 +224,11 @@ class NetballController extends Controller
     // Players management  
     public function GetAllPlayers()
     {
-        $this->data['players'] = NetballPlayer::all();
+        $this->data['players'] = NetballPlayer::with(['course','team'])->get();
         return view($this->viewPath . '.players', $this->data);
     }
+
+    
 
     public function CreatePlayers(Request $request)
     {
@@ -290,17 +292,17 @@ class NetballController extends Controller
 // Fixtures management  
     public function GetTeamFixtures()
     {
-        $this->data['tournaments'] = FootbalTournament::with('games')->get();
+        $this->data['tournaments'] = NetballTournament::with('games')->get();
         return view($this->viewPath . '.fixtures', $this->data);
     }
 
     public function GenerateFixtures(Request $request)
     {
         $tournament_id = $request->tournament_id;
-        $teams = FootbalTeam::all();
+        $teams = NetballTeam::all();
         $fixtures = $this->generateRoundRobinFixtures($teams, $tournament_id);
         foreach ($fixtures as $fixture) {
-            FootbalGames::create($fixture);
+            NetballGames::create($fixture);
         }
         return redirect($this->viewPath . '/Fixtures')->with('success', 'Fixtures generated successfully');
     }
@@ -337,7 +339,7 @@ class NetballController extends Controller
 
     private function getUsedSlots()
     {
-        $games = FootbalGames::all(['venue_id', 'date', 'start_time']);
+        $games = NetballGames::all(['venue_id', 'date', 'start_time']);
         $slots = [];
 
         foreach ($games as $game) {
