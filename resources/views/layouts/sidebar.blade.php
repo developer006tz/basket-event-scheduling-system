@@ -50,7 +50,7 @@
               </li>
 
               <li>
-                <a href="{{ url('football/Coaches') }}" class="nav-link px-3">
+                <a href="{{ url('football/Coachers') }}" class="nav-link px-3">
                   <span class="me-2"><i class="bi bi-people"></i></span>
                   <span>Coaches</span>
                 </a>
@@ -77,6 +77,24 @@
             </ul>
           </div>
         </li>
+        <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+            <li>
+              <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+                SETTINGS
+              </div>
+            </li>
+            <li>
+              <a href="{{ url('courses') }}" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-graph-up"></i></span>
+                <span>Mocu Courses</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('admins') }}" class="nav-link px-3">
+                <span class="me-2"><i class="fa fa-user"></i></span>
+                <span>Admin users</span>
+              </a>
+            </li>
        
       </ul>
     </nav>

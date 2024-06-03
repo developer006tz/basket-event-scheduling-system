@@ -30,6 +30,19 @@ Route::group(['prefix'=> 'football','middleware'=>'auth'], function ($football) 
     $football->any('Tournaments/Update', [FootballController::class,'UpdateTournament']);
     $football->get('Tournaments/Delete', [FootballController::class,'DeleteTournament']);
 
+    #coach
+    $football->get('Coachers', [FootballController::class,'GetAllCoachers']);
+    $football->any('Coacher/Create', [FootballController::class,'CreateCoacher']);
+    $football->any('Coacher/Update', [FootballController::class,'UpdateCoacher']);
+    $football->get('Coacher/Delete', [FootballController::class,'DeleteCoacher']);
+
+    #players
+    $football->get('Players', [FootballController::class,'GetAllPlayers']);
+    $football->any('Players/Create', [FootballController::class,'CreatePlayers']);
+    $football->any('Players/Update', [FootballController::class,'UpdatePlayers']);
+    $football->get('Players/Delete', [FootballController::class,'DeleteCoacher']);
+
+
 });
 
 Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basket) {
@@ -41,10 +54,16 @@ Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
 });
 
 Route::group(['prefix'=> 'courses','middleware'=>'auth'], function ($courses) {
-    $courses->get('/', [CourseController::class, 'coursesDashboard'])->name('courses');
+    $courses->get('/', [CourseController::class, 'coursesDashboard']);
+    $courses->any('create', [CourseController::class, 'coursesCreate']);
+    $courses->any('update', [CourseController::class, 'coursesUpdate']);
+    $courses->get('delete', [CourseController::class, 'coursesDelete']);
 });
 
 Route::group(['prefix'=> 'admins','middleware'=>'auth'], function ($admins) {
-    $admins->get('/', [UserController::class, 'adminsDashboard'])->name('admins');
+    $admins->get('/', [UserController::class, 'adminsDashboard']);
+    $admins->any('create', [UserController::class, 'adminsCreate']);
+    $admins->any('update', [UserController::class, 'adminsUpdate']);
+    $admins->get('delete', [UserController::class, 'adminsDelete']);
 });
 

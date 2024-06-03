@@ -10,4 +10,8 @@ class FootbalTeam extends Model
     use HasFactory;
     protected $table = 'FootbalTeam';
     protected $fillable = ['name','short_name', 'coach_id', 'badge', 'venue_id'];
+
+    public function coach(){
+        return $this->belongsTo(FootbalCoach::class);
+    }
 }
