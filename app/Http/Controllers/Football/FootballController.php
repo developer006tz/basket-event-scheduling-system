@@ -22,6 +22,10 @@ class FootballController extends Controller
     protected $data = [];
     private $viewPath = 'football';
 
+    public function __construct(){
+        $this->data['url'] = 'football';
+    }
+
     public function footballDashboard(){
         $this->data['players'] = FootbalPlayer::count();
         $this->data['games'] = FootbalGames::all();
@@ -108,9 +112,8 @@ class FootballController extends Controller
 
     public function CreateTournament(Request $request){
         if ($request->isMethod('GET')) {
-            return view($this->viewPath . '.createTournament');
+            return view($this->viewPath . '.createTournament',$this->data);
         } else {
-            // dd($request->all());
             $tournament = new FootbalTournament();
             $tournament->fill($request->all());
             $tournament->save();
@@ -379,7 +382,7 @@ class FootballController extends Controller
             $playerStatistics = new FootbalTournamentPlayerStatistics();
             $playerStatistics->fill($request->all());
             $playerStatistics->save();
-            return redirect('football/Player/Statistics')->with('success', 'Player Statistics created successfully');
+            return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics created successfully');
         }
     }
 
@@ -394,13 +397,13 @@ class FootballController extends Controller
             $playerStatistics = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
             $playerStatistics->fill($request->all());
             $playerStatistics->save();
-            return redirect('football/Player/Statistics')->with('success', 'Player Statistics updated successfully');
+            return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics updated successfully');
         }
     }
 
     public function DeletePlayerStatistics(Request $request){
         $playerStatistics = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
         $playerStatistics->delete();
-        return redirect('football/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
+        return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
     }
 }
