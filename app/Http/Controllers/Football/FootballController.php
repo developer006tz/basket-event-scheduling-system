@@ -84,4 +84,40 @@ class FootballController extends Controller
         $team->delete();
         return redirect($this->viewPath.'/Teams')->with('success','deleted successfull');
     }
+
+    #tournaments
+    public function GetAllTournaments(){
+        $this->data['tournaments'] = FootbalTournament::all();
+        return view($this->viewPath . '.tournaments', $this->data);
+    }
+
+    public function CreateTournament(Request $request){
+        if ($request->isMethod('GET')) {
+            return view($this->viewPath . '.createTournament');
+        } else {
+            // dd($request->all());
+            $tournament = new FootbalTournament();
+            $tournament->fill($request->all());
+            $tournament->save();
+            return redirect($this->viewPath . '/Tournaments')->with('success', 'Tournament created successfully');
+        }
+    }
+
+    public function UpdateTournament(Request $request){
+        if ($request->isMethod('GET')) {
+            $this->data['tournament'] = FootbalTournament::find($request->tournament_id);
+            return view($this->viewPath . '.updateTournament', $this->data);
+        } else {
+            $tournament = FootbalTournament::find($request->tournament_id);
+            $tournament->fill($request->all());
+            $tournament->save();
+            return redirect($this->viewPath . '/Tournaments')->with('success', 'Tournament updated successfully');
+        }
+    }
+
+    public function DeleteTournament(Request $request){
+        $tournament = FootbalTournament::find($request->tournament_id);
+        $tournament->delete();
+        return redirect($this->viewPath . '/Tournaments')->with('success', 'Tournament deleted successfully');
+    }
 }

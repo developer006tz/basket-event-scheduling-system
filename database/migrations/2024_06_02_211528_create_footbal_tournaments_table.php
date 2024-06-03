@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('year');
             $table->date('start_date');
             $table->date('end_date');
-            $table->float('first_winner_award');
-            $table->float('second_winner_award')->nullable();
-            $table->float('third_winner_award')->nullable();
+            $table->string('first_winner_award');
+            $table->string('second_winner_award')->nullable();
+            $table->string('third_winner_award')->nullable();
             $table->timestamps();
         });
     }
