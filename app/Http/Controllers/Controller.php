@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function generate_games(Request $request): RedirectResponse
+   /* public function generate_games(Request $request): RedirectResponse
     {
 
         // Get all teams
@@ -76,5 +76,5 @@ class Controller extends BaseController
         return redirect()
             ->route('all-games.index')
             ->withSuccess(__('crud.common.created'));
-    }
+    }*/
 }

@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->integer('away_score')->nullable();
             $table->unsignedBigInteger('win_team_id')->nullable();
             $table->timestamps();
-
         });
     }
 

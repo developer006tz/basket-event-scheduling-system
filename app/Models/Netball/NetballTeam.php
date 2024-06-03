@@ -9,5 +9,5 @@ class NetballTeam extends Model
 {
     use HasFactory;
     protected $table = 'NetballTeam';
-    protected $fillable = ['name','short_name', 'coach_id', 'badge', 'venue'];
+    protected $fillable = ['name','short_name', 'coach_id', 'badge', 'venue_id'];
 }

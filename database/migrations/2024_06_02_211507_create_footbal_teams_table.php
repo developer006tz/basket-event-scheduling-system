@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id('id');
             $table->string('name');
             $table->string('short_name')->nullable();
-            $table->unsignedBigInteger('coach_id');
+            $table->unsignedBigInteger('coach_id')->nullable();
             $table->string('badge')->nullable();
-            $table->string('venue');
+            $table->unsignedBigInteger('venue');
             $table->timestamps();
         });
     }

@@ -3,21 +3,18 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 float-right">
+            <div class="col-sm-12">
                 <h4>Welcome {{ Auth::user()->name }}
-                    @forelse (Auth::user()->roles as $role)
-                        <b class="btn btn-sm disabled btn-success">{{ $role->name }}</b>
-                    @empty -
-                    @endforelse
                 </h4>
+                <h3>( Moccu Football Management )</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3 mb-3">
                 <div class="card bg-primary text-white h-100">
-                    <div class="card-body py-5">All Users {{ count($users) ?? '-' }}</div>
-                    <a href="{{ route('users.index') }}" class="card-footer d-flex link">
-                        View Details
+                    <div class="card-body py-5">Teams {{ $teams ?? '0' }}</div>
+                    <a href="{{ url('football/team') }}" class="card-footer d-flex link">
+                        View Teams
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
                         </span>
@@ -26,10 +23,10 @@
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card bg-warning text-dark h-100">
-                    <div class="card-body py-5">Players {{ $players->count() ?? '-' }}<sup style="font-size: 20px"></sup>
+                    <div class="card-body py-5">Players {{ $players ?? '0' }}<sup style="font-size: 20px"></sup>
                     </div>
-                    <a href="{{ route('all-players.index') }}" class="card-footer d-flex link">
-                        View Details
+                    <a href="{{ url('football/players') }}" class="card-footer d-flex link">
+                        View Players
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
                         </span>
@@ -38,9 +35,9 @@
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card bg-success text-white h-100">
-                    <div class="card-body py-5">Coaches {{ $coaches->count() ?? '-' }}</div>
-                    <a href="{{ route('all-coaches.index') }}" class="card-footer d-flex link">
-                        View Details
+                    <div class="card-body py-5">Coaches {{ $coaches ?? '-' }}</div>
+                    <a href="{{ url('football/coaches') }}" class="card-footer d-flex link">
+                        View Coaches
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
                         </span>
@@ -49,8 +46,8 @@
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card bg-danger text-white h-100">
-                    <div class="card-body py-5">Teams {{ count($teams) ?? '-' }}</div>
-                    <a href="{{ route('all-teams.index') }}" class="card-footer d-flex link">
+                    <div class="card-body py-5">Tournaments {{ $tournaments ?? '-' }}</div>
+                    <a href="{{ url('football/tournaments') }}" class="card-footer d-flex link">
                         View Details
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
@@ -91,14 +88,6 @@
                                         </tr>
                                     @endforelse
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Home team</th>
-                                        <th>Away Team</th>
-                                        <th>Arena</th>
-                                        <th>Result</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
