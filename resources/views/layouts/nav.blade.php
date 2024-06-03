@@ -13,12 +13,12 @@
     </button>
     <div class="collapse navbar-collapse" id="topNavBar">
       <form class="d-flex ms-auto my-3 my-lg-0">
-        <div class="input-group">
+        <!-- <div class="input-group">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-primary" type="submit">
             <i class="bi bi-search"></i>
           </button>
-        </div>
+        </div> -->
       </form>
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
@@ -28,7 +28,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             @php $user = auth()->user(); @endphp
-            <li><a class="dropdown-item" href="{{url("user?user_id=$user->id")}}">profile</a></li>
+            <li><a class="dropdown-item" href="{{url("admins/profile?admin_id=$user->id")}}">profile</a></li>
             <li><a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a></li>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -68,4 +68,9 @@ class UserController extends Controller
         $admin->delete();
         return redirect('admins')->with('success', 'Admin deleted successfully');
     }
+
+    public function adminProfile(Request $request){
+        $admin = User::find($request->admin_id);
+        return view('admins.profile', compact('admin'));
+    }
 }

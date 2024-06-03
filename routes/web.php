@@ -60,7 +60,7 @@ Route::group(['prefix'=> 'football','middleware'=>'auth'], function ($football) 
 });
 #TODO NETBALL
 Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
-    $netball->get('/', [NetballController::class, 'NetballDashboard'])->name('home');
+    $netball->get('/', [NetballController::class, 'NetballDashboard']);
     $netball->get('Teams', [NetballController::class, 'Teams']);
     $netball->any('Team/Create', [NetballController::class, 'CreateTeam']);
     $netball->any('Team/Update', [NetballController::class, 'UpdateTeam']);
@@ -103,7 +103,7 @@ Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
 
 #TODO BASKETBALL
 Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basketball) {
-    $basketball->get('/', [BasketController::class, 'BasketballDashboard'])->name('home');
+    $basketball->get('/', [BasketController::class, 'BasketballDashboard']);
     $basketball->get('Teams', [BasketController::class, 'Teams']);
     $basketball->any('Team/Create', [BasketController::class, 'CreateTeam']);
     $basketball->any('Team/Update', [BasketController::class, 'UpdateTeam']);
@@ -162,5 +162,6 @@ Route::group(['prefix'=> 'admins','middleware'=>'auth'], function ($admins) {
     $admins->any('create', [UserController::class, 'adminsCreate']);
     $admins->any('update', [UserController::class, 'adminsUpdate']);
     $admins->get('delete', [UserController::class, 'adminsDelete']);
+    $admins->get('profile', [UserController::class,'adminProfile']);
 });
 

@@ -28,6 +28,7 @@ class NetballController extends Controller
     }
 
     public function NetballDashboard(){
+        $this->data['title'] = 'Netball';
         $this->data['players'] = NetballPlayer::count();
         $this->data['games'] = NetballGames::all();
         $this->data['teams'] = NetballTeam::count();

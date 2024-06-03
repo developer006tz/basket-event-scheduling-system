@@ -6,7 +6,7 @@
             <div class="col-sm-12">
                 <h4>Welcome {{ Auth::user()->name }}
                 </h4>
-                <h3>( Moccu Football Management )</h3>
+                <h3>Moccu {{$title}} Management</h3>
             </div>
         </div>
         <div class="row">

@@ -27,6 +27,7 @@ class FootballController extends Controller
     }
 
     public function footballDashboard(){
+        $this->data['title'] = 'Football';
         $this->data['players'] = FootbalPlayer::count();
         $this->data['games'] = FootbalGames::all();
         $this->data['teams'] = FootbalTeam::count();

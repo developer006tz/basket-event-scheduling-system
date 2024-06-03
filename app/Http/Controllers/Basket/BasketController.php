@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Basket;
 
 use App\Http\Controllers\Controller;
+use App\Models\Basket\BasketCoach;
 use App\Models\Course;
 use App\Models\Basket\NetballCoach;
 use App\Models\Basket\BasketGames;
@@ -26,7 +27,8 @@ class BasketController extends Controller
         $this->data['url'] = 'basketball';
     }
 
-    public function BasketDashboard(){
+    public function BasketballDashboard(){
+        $this->data['title'] = 'BasketBall';
         $this->data['players'] = BasketPlayer::count();
         $this->data['games'] = BasketGames::all();
         $this->data['teams'] = BasketTeam::count();
