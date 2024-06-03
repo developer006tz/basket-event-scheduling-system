@@ -408,4 +408,39 @@ class NetballController extends Controller
         $playerStatistics->delete();
         return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
     }
+
+    // Venues management  
+    public function getAllStadium(){
+        $this->data['stadiums'] = NetballVenues::all();
+        return view($this->viewPath . '.stadiums', $this->data);
+    }
+
+    public function CreateStadium(Request $request){
+        if ($request->isMethod('GET')) {
+            return view($this->viewPath . '.createStadium', $this->data);
+        } else {
+            $stadium = new NetballVenues();
+            $stadium->fill($request->all());
+            $stadium->save();
+            return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium created successfully');
+        }
+    }
+
+    public function UpdateStadium(Request $request){
+        if ($request->isMethod('GET')) {
+            $this->data['stadium'] = NetballVenues::find($request->stadium_id);
+            return view($this->viewPath . '.updateStadium', $this->data);
+        } else {
+            $stadium = NetballVenues::find($request->stadium_id);
+            $stadium->fill($request->all());
+            $stadium->save();
+            return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium updated successfully');
+        }
+    }
+
+    public function DeleteStadium(Request $request){
+        $stadium = NetballVenues::find($request->stadium_id);
+        $stadium->delete();
+        return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium deleted successfully');
+    }
 }

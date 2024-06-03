@@ -55,6 +55,13 @@
                 </a>
               </li>
               <li>
+                <a href="{{ url('football/Stadium') }}" class="nav-link px-3">
+                  <span class="me-2"><i class="fa-solid fa-barcode"></i>
+                  </span>
+                  <span>Stadiums</span>
+                </a>
+              </li>
+              <li>
                 <a href="{{ url('football/Fixtures') }}" class="nav-link px-3">
                   <span class="me-2"><i class="fa-solid fa-calendar-days"></i>
                   </span>
@@ -126,6 +133,13 @@
                   <span class="me-2"><i class="bi bi-person-badge-fill"></i>
                   </span>
                   <span>Teams</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url('netball/Stadium') }}" class="nav-link px-3">
+                  <span class="me-2"><i class="fa-solid fa-barcode"></i>
+                  </span>
+                  <span>Stadiums</span>
                 </a>
               </li>
               <li>
@@ -201,6 +215,13 @@
                   <span class="me-2"><i class="bi bi-person-badge-fill"></i>
                   </span>
                   <span>Teams</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url('basketball/Stadium') }}" class="nav-link px-3">
+                  <span class="me-2"><i class="fa-solid fa-barcode"></i>
+                  </span>
+                  <span>Stadiums</span>
                 </a>
               </li>
               <li>

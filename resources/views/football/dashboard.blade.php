@@ -70,7 +70,7 @@
                                     <tr>
                                         <th>Home team</th>
                                         <th>Away Team</th>
-                                        <th>Arena</th>
+                                        <th>Stadium</th>
                                         <th>Result</th>
                                     </tr>
                                 </thead>
@@ -79,7 +79,7 @@
                                         <tr>
                                             <td> {{ $game->homeTeam->name ?? '-' }} </td>
                                             <td>{{ $game->awayTeam->name ?? '-' }} </td>
-                                            <td>{{ $game->location ?? '-' }} </td>
+                                            <td>{{ $game->venue->name ?? '-' }} </td>
                                             <td>-no-result </td>
                                         </tr>
                                     @empty

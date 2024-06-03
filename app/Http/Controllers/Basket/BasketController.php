@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Basket;
 use App\Http\Controllers\Controller;
 use App\Models\Basket\BasketCoach;
 use App\Models\Course;
-use App\Models\Basket\NetballCoach;
 use App\Models\Basket\BasketGames;
 use App\Models\Basket\BasketPlayer;
 use App\Models\Basket\BasketTeam;
@@ -408,5 +407,40 @@ class BasketController extends Controller
         $playerStatistics->delete();
         return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
     }
+
+        // Venues management  
+        public function getAllStadium(){
+            $this->data['stadiums'] = BasketVenues::all();
+            return view($this->viewPath . '.stadiums', $this->data);
+        }
+    
+        public function CreateStadium(Request $request){
+            if ($request->isMethod('GET')) {
+                return view($this->viewPath . '.createStadium', $this->data);
+            } else {
+                $stadium = new BasketVenues();
+                $stadium->fill($request->all());
+                $stadium->save();
+                return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium created successfully');
+            }
+        }
+    
+        public function UpdateStadium(Request $request){
+            if ($request->isMethod('GET')) {
+                $this->data['stadium'] = BasketVenues::find($request->stadium_id);
+                return view($this->viewPath . '.updateStadium', $this->data);
+            } else {
+                $stadium = BasketVenues::find($request->stadium_id);
+                $stadium->fill($request->all());
+                $stadium->save();
+                return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium updated successfully');
+            }
+        }
+    
+        public function DeleteStadium(Request $request){
+            $stadium = BasketVenues::find($request->stadium_id);
+            $stadium->delete();
+            return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium deleted successfully');
+        }
 
 }

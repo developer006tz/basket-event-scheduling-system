@@ -57,6 +57,12 @@ Route::group(['prefix'=> 'football','middleware'=>'auth'], function ($football) 
     $football->any('Player/Statistics/Create', [FootballController::class,'CreatePlayerStatistics']);
     $football->any('Player/Statistics/Update', [FootballController::class,'UpdatePlayerStatistics']);
     $football->get('Player/Statistics/Delete', [FootballController::class,'DeletePlayerStatistics']);
+
+     #VENUES (stadium)
+     $football->get('Stadium', [FootballController::class,'getAllStadium']);
+     $football->any('Stadium/Create', [FootballController::class,'CreateStadium']);
+     $football->any('Stadium/Update', [FootballController::class,'UpdateStadium']);
+     $football->any('Stadium/Delete', [FootballController::class,'DeleteStadium']);
 });
 #TODO NETBALL
 Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
@@ -99,6 +105,12 @@ Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
     $netball->any('Player/Statistics/Create', [NetballController::class,'CreatePlayerStatistics']);
     $netball->any('Player/Statistics/Update', [NetballController::class,'UpdatePlayerStatistics']);
     $netball->get('Player/Statistics/Delete', [NetballController::class,'DeletePlayerStatistics']);
+
+    #VENUES (stadium)
+    $netball->get('Stadium', [NetballController::class,'getAllStadium']);
+    $netball->any('Stadium/Create', [NetballController::class,'CreateStadium']);
+    $netball->any('Stadium/Update', [NetballController::class,'UpdateStadium']);
+    $netball->any('Stadium/Delete', [NetballController::class,'DeleteStadium']);
 });
 
 #TODO BASKETBALL
@@ -142,6 +154,12 @@ Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basketba
     $basketball->any('Player/Statistics/Create', [BasketController::class,'CreatePlayerStatistics']);
     $basketball->any('Player/Statistics/Update', [BasketController::class,'UpdatePlayerStatistics']);
     $basketball->get('Player/Statistics/Delete', [BasketController::class,'DeletePlayerStatistics']);
+
+    #VENUES (stadium)
+    $basketball->get('Stadium', [BasketController::class,'getAllStadium']);
+    $basketball->any('Stadium/Create', [BasketController::class,'CreateStadium']);
+    $basketball->any('Stadium/Update', [BasketController::class,'UpdateStadium']);
+    $basketball->any('Stadium/Delete', [BasketController::class,'DeleteStadium']);
 });
 
 
