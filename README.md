@@ -17,8 +17,8 @@ The Football Tournament Management System is a comprehensive application designe
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/football-tournament-management.git
-   cd football-tournament-management
+   git clone https://github.com/developer006tz/sports-and-games-management-system.git
+   cd sports-and-games-management-system
    ```
 
 2. **Install Dependencies**:
