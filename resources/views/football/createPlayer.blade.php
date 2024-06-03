@@ -41,6 +41,7 @@
                             <label for="team_id" class="form-label">Team</label>
                             <select name="team_id" class="form-select" id="team_id">
                                 <option value="">__select_Player_Team__</option>
+                                {{dd($teams)}}
                                 @foreach ($teams as $team )
                                 <option value="{{$team->id}}">{{$team->name}}</option>
                                 @endforeach

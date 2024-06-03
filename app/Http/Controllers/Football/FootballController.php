@@ -15,6 +15,7 @@ use App\Models\Footbal\FootbalVenues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\JimmyTraits;
+use Carbon\Carbon;
 
 class FootballController extends Controller
 {
@@ -266,8 +267,8 @@ class FootballController extends Controller
         return redirect($this->viewPath.'/Players')->with('success', 'Player deleted successfully');
     }
 
-     // Fixtures management  
-     public function GetTeamFixtures(){
+      // Fixtures management  
+    public function GetTeamFixtures(){
         $this->data['tournaments'] = FootbalTournament::with('games')->get();
         return view($this->viewPath . '.fixtures', $this->data);
     }
@@ -275,23 +276,23 @@ class FootballController extends Controller
     public function GenerateFixtures(Request $request){
         $tournament_id = $request->tournament_id;
         $teams = FootbalTeam::all();
-
         // Algorithm to generate fixtures
         $fixtures = $this->generateRoundRobinFixtures($teams, $tournament_id);
-
         foreach ($fixtures as $fixture) {
             FootbalGames::create($fixture);
         }
-
-        return redirect($this->viewPath.'/Fixtures')->with('success', 'Fixtures generated successfully');
+        return redirect('football/Fixtures')->with('success', 'Fixtures generated successfully');
     }
 
     private function generateRoundRobinFixtures($teams, $tournament_id) {
         $fixtures = [];
         $teamCount = count($teams);
         $teams = $teams->toArray(); // Convert collection to array
+        $gameDays = [];
+        $usedSlots = [];
 
         for ($round = 0; $round < $teamCount - 1; $round++) {
+            $dayOffset = $round * 2; // Spreading games every 2 days
             for ($match = 0; $match < $teamCount / 2; $match++) {
                 $home = ($round + $match) % ($teamCount - 1);
                 $away = ($teamCount - 1 - $match + $round) % ($teamCount - 1);
@@ -301,28 +302,49 @@ class FootballController extends Controller
                 }
 
                 if ($teams[$home]['id'] != $teams[$away]['id']) {
+                    // Home game
+                    $homeTime = $this->findAvailableTimeSlot($teams[$home]['venue_id'], $dayOffset, $usedSlots);
                     $fixtures[] = [
                         'home_team_id' => $teams[$home]['id'],
                         'away_team_id' => $teams[$away]['id'],
                         'tournament_id' => $tournament_id,
-                        'date' => now()->addDays($round * 7),
-                        'start_time' => '15:00:00',
+                        'date' => $homeTime->toDateString(),
+                        'start_time' => $homeTime->format('H:i:s'),
                         'venue_id' => $teams[$home]['venue_id'],
                     ];
+                    $usedSlots[$teams[$home]['venue_id']][$homeTime->toDateString()][$homeTime->format('H:i:s')] = true;
 
+                    // Away game
+                    $awayTime = $this->findAvailableTimeSlot($teams[$away]['venue_id'], $dayOffset, $usedSlots);
                     $fixtures[] = [
                         'home_team_id' => $teams[$away]['id'],
                         'away_team_id' => $teams[$home]['id'],
                         'tournament_id' => $tournament_id,
-                        'date' => now()->addDays($round * 7 + 1),
-                        'start_time' => '15:00:00',
+                        'date' => $awayTime->toDateString(),
+                        'start_time' => $awayTime->format('H:i:s'),
                         'venue_id' => $teams[$away]['venue_id'],
                     ];
+                    $usedSlots[$teams[$away]['venue_id']][$awayTime->toDateString()][$awayTime->format('H:i:s')] = true;
                 }
             }
         }
 
         return $fixtures;
+    }
+
+    private function findAvailableTimeSlot($venue_id, $dayOffset, &$usedSlots) {
+        $date = now()->addDays($dayOffset);
+        $startTime = Carbon::createFromTimeString("10:00:00");
+        $endTime = Carbon::createFromTimeString("16:00:00");
+
+        while ($startTime->lessThanOrEqualTo($endTime)) {
+            if (empty($usedSlots[$venue_id][$date->toDateString()][$startTime->format('H:i:s')])) {
+                return $startTime;
+            }
+            $startTime->addHour();
+        }
+        // If no slots are available, increment the day and reset the time
+        return $this->findAvailableTimeSlot($venue_id, $dayOffset + 1, $usedSlots);
     }
 
 
