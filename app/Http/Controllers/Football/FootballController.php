@@ -223,7 +223,7 @@ class FootballController extends Controller
     // Players management  
     public function GetAllPlayers()
     {
-        $this->data['players'] = FootbalPlayer::all();
+        $this->data['players'] = FootbalPlayer::with(['course','team'])->get();
         return view($this->viewPath . '.players', $this->data);
     }
 
