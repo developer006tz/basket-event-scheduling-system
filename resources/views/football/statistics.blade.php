@@ -47,8 +47,8 @@
                             <td>{{ $stat->goals_conceded }}</td>
                             <td>{{ ucfirst($stat->game_status) }}</td>
                             <td class="text-center">
-                                <a href="{{ url("football/Team/Statistics/Update?statistics_id=$stat->id") }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url("football/Team/Statistics/Delete?statistics_id=$stat->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete these statistics?')">Delete</a>
+                                <a href="{{ url("$url/Team/Statistics/Update?statistics_id=$stat->id") }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url("$url/Team/Statistics/Delete?statistics_id=$stat->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete these statistics?')">Delete</a>
                             </td>
                         </tr>
                         @endforeach

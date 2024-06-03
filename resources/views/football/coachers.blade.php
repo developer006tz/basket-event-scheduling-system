@@ -43,8 +43,8 @@
                             <td>{{ $coach->phone }}</td>
                             <td>{{ $coach->team->name ?? 'N/A' }}</td>
                             <td class="text-center">
-                                <a href="{{ url("football/Coacher/Update?coach_id=$coach->id") }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url("football/Coacher/Delete?coach_id=$coach->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Coach?')">Delete</a>
+                                <a href="{{ url("$url/Coacher/Update?coach_id=$coach->id") }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url("$url/Coacher/Delete?coach_id=$coach->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Coach?')">Delete</a>
                             </td>
                         </tr>
                         @empty 

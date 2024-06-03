@@ -47,8 +47,8 @@
                             <td>{{ $player->team->name ?? 'N/A' }}</td>
                             <td>{{ $player->course->name ?? 'N/A' }}</td>
                             <td class="text-center">
-                                <a href="{{ url("football/Players/Update?player_id=$player->id") }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url("football/Players/Delete?player_id=$player->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Player?')">Delete</a>
+                                <a href="{{ url("$url/Players/Update?player_id=$player->id") }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url("$url/Players/Delete?player_id=$player->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Player?')">Delete</a>
                             </td>
                         </tr>
                         @empty 

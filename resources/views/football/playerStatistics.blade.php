@@ -49,8 +49,8 @@
                             <td>{{ $stat->yellow_card }}</td>
                             <td>{{ $stat->red_card }}</td>
                             <td class="text-center">
-                                <a href="{{ url("football/Player/Statistics/Update?playerStatistics_id=$stat->id") }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url("football/Player/Statistics/Delete?playerStatistics_id=$stat->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete these statistics?')">Delete</a>
+                                <a href="{{ url("$url/Player/Statistics/Update?playerStatistics_id=$stat->id") }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url("$url/Player/Statistics/Delete?playerStatistics_id=$stat->id") }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete these statistics?')">Delete</a>
                             </td>
                         </tr>
                         @endforeach
