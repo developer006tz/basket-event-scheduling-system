@@ -17,7 +17,7 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <style>
         body {
-    background: url('/assets/images/basket.webp') no-repeat fixed center center;
+    background: url('/assets/images/mocu.jpg') no-repeat fixed center center;
     background-size: cover;
     font-family: Montserrat;
 }
