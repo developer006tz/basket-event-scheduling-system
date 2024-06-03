@@ -13,7 +13,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card bg-primary text-white h-100">
                     <div class="card-body py-5">Teams {{ $teams ?? '0' }}</div>
-                    <a href="{{ url('football/team') }}" class="card-footer d-flex link">
+                    <a href="{{ url('football/Teams') }}" class="card-footer d-flex link">
                         View Teams
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>

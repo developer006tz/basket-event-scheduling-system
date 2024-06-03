@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('short_name')->nullable();
             $table->unsignedBigInteger('coach_id')->nullable();
             $table->string('badge')->nullable();
-            $table->unsignedBigInteger('venue');
+            $table->unsignedBigInteger('venue_id');
             $table->timestamps();
         });
     }

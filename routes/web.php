@@ -21,6 +21,8 @@ Route::group(['prefix'=> 'football'], function ($football) {
     $football->get('/', [FootballController::class, 'footballDashboard'])->name('home');
     $football->get('Teams', [FootballController::class, 'Teams']);
     $football->any('Team/Create', [FootballController::class, 'CreateTeam']);
+    $football->any('Team/Update', [FootballController::class, 'UpdateTeam']);
+    $football->get('Team/Delete', [FootballController::class,'DeleteTeam']);
 });
 
 Route::group(['prefix'=> 'basketball'], function ($basket) {

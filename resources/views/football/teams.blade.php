@@ -21,6 +21,7 @@
                 <table id="example" class="table table-striped data-table" style="width: 100%">
                     <thead>
                         <tr>
+                            <th>SN</th>
                             <th class="text-left">
                                 Team Name
                             </th>
@@ -40,20 +41,21 @@
                     </thead>
                     <tbody>
                         @forelse($teams as $team)
+                        <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$team->name}}</td>
                         <td>{{$team->short_name}}</td>
                         <td>{{$team->coach->name ?? ''}}</td>
                         <td>
-                            <img src="{{asset("uploads/$team->badge")}}" alt="team-badge">
+                            <img src="{{asset("uploads/$team->badge")}}" style="width:100px;height:100px;" alt="team-badge">
                         </td>
-                        <td>
-                            <a href="{{url("football/Team/edit?team_id=$team->id")}}" class="btn btn-primary">edit</a>
-                            <a href="{{url("football/Team/delete?team_id=$team->id")}}" class="btn btn-danger">delete</a>
-                        </td>
+                        <td class="text-center">
+                            <a href="{{url("football/Team/Update?team_id=$team->id")}}" class="btn btn-primary">edit</a>
+                            <a href="{{url("football/Team/Delete?team_id=$team->id")}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this team?')">delete</a>                        </td>
+                        </tr>
                         @empty 
                         <tr>
-                            <td colspan="5" class="text-center">
+                            <td colspan="6" class="text-center">
                                 <img src="{{asset('/empty.png')}}" alt="empty">
                             </td>
                         </tr>
