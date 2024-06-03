@@ -23,11 +23,13 @@ class FootballController extends Controller
     protected $data = [];
     private $viewPath = 'football';
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->data['url'] = 'football';
     }
 
-    public function footballDashboard(){
+    public function footballDashboard()
+    {
         $this->data['title'] = 'Football';
         $this->data['players'] = FootbalPlayer::count();
         $this->data['games'] = FootbalGames::all();
@@ -39,82 +41,88 @@ class FootballController extends Controller
     }
 
     // Teams management  
-    public function Teams(){
+    public function Teams()
+    {
         $this->data['teams'] = FootbalTeam::all();
         return view($this->viewPath . '.teams', $this->data);
     }
 
-    public function CreateTeam(Request $request){
+    public function CreateTeam(Request $request)
+    {
         if ($request->isMethod('GET')) {
-            $this->data['coaches'] = FootbalCoach::where('team_id',null)->get();
-            $this->data['venues'] = FootbalVenues::select('name','id')->get();
-            return view($this->viewPath .'.createTeam', $this->data);
-        }else{
-           $team  = new FootbalTeam();
-           $team->fill($request->all());
-           $team->save();
-           
-           if(!empty($request->input('coach_id'))) {
-            $coach = FootbalCoach::find($request->input('coach_id'));
-            $coach->team_id = $team->id;
-            $coach->save();
-           }
-           if ($request->hasFile('badge')) {
-            $file = $request->file('badge');
-            $filename = time() .'.'. $file->extension();
-            $this->upload_file($file,$filename);
-            $team->badge = $filename;
+            $this->data['coaches'] = FootbalCoach::where('team_id', null)->get();
+            $this->data['venues'] = FootbalVenues::select('name', 'id')->get();
+            return view($this->viewPath . '.createTeam', $this->data);
+        } else {
+            $team = new FootbalTeam();
+            $team->fill($request->all());
             $team->save();
-           }
-           return redirect($this->viewPath.'/Teams')->with('success','added successfull');
+
+            if (!empty($request->input('coach_id'))) {
+                $coach = FootbalCoach::find($request->input('coach_id'));
+                $coach->team_id = $team->id;
+                $coach->save();
+            }
+            if ($request->hasFile('badge')) {
+                $file = $request->file('badge');
+                $filename = time() . '.' . $file->extension();
+                $this->upload_file($file, $filename);
+                $team->badge = $filename;
+                $team->save();
+            }
+            return redirect($this->viewPath . '/Teams')->with('success', 'added successfull');
         }
-        
+
     }
 
-    public function UpdateTeam(Request $request){
+    public function UpdateTeam(Request $request)
+    {
         if ($request->isMethod('GET')) {
-            $this->data['coaches'] = FootbalCoach::where('team_id',null)->get();
-            $this->data['venues'] = FootbalVenues::select('name','id')->get();
+            $this->data['coaches'] = FootbalCoach::where('team_id', null)->get();
+            $this->data['venues'] = FootbalVenues::select('name', 'id')->get();
             $this->data['team'] = FootbalTeam::find($request->team_id);
-            return view($this->viewPath .'.updateTeam', $this->data);
-        }else{
-           $team  = FootbalTeam::find($request->team_id);
-           $team->fill($request->all());
-           $team->save();
-           if(!empty($request->input('coach_id'))) {
-            $coach = FootbalCoach::find($request->input('coach_id'));
-            $coach->team_id = $team->id;
-            $coach->save();
-        }
-           if ($request->hasFile('badge')) {
-            $this->delete_file($team->badge);
-            $file = $request->file('badge');
-            $filename = time() .'.'. $file->extension();
-            $this->upload_file($file,$filename);
-            $team->badge = $filename;
+            return view($this->viewPath . '.updateTeam', $this->data);
+        } else {
+            $team = FootbalTeam::find($request->team_id);
+            $team->fill($request->all());
             $team->save();
-           }
-           return redirect($this->viewPath.'/Teams')->with('success','Updated successfull');
+            if (!empty($request->input('coach_id'))) {
+                $coach = FootbalCoach::find($request->input('coach_id'));
+                $coach->team_id = $team->id;
+                $coach->save();
+            }
+            if ($request->hasFile('badge')) {
+                $this->delete_file($team->badge);
+                $file = $request->file('badge');
+                $filename = time() . '.' . $file->extension();
+                $this->upload_file($file, $filename);
+                $team->badge = $filename;
+                $team->save();
+            }
+            return redirect($this->viewPath . '/Teams')->with('success', 'Updated successfull');
         }
-        
+
     }
 
-    public function DeleteTeam(Request $request){
+    public function DeleteTeam(Request $request)
+    {
         $team = FootbalTeam::find($request->team_id);
         $this->delete_file($team->badge);
         $team->delete();
-        return redirect($this->viewPath.'/Teams')->with('success','deleted successfull');
+        return redirect($this->viewPath . '/Teams')->with('success', 'deleted successfull');
     }
 
     #tournaments
-    public function GetAllTournaments(){
+    public function GetAllTournaments()
+    {
         $this->data['tournaments'] = FootbalTournament::all();
         return view($this->viewPath . '.tournaments', $this->data);
     }
 
-    public function CreateTournament(Request $request){
+    public function CreateTournament(Request $request)
+    {
         if ($request->isMethod('GET')) {
-            return view($this->viewPath . '.createTournament',$this->data);
+            return view($this->viewPath . '.createTournament', $this->data);
         } else {
             $tournament = new FootbalTournament();
             $tournament->fill($request->all());
@@ -123,7 +131,8 @@ class FootballController extends Controller
         }
     }
 
-    public function UpdateTournament(Request $request){
+    public function UpdateTournament(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['tournament'] = FootbalTournament::find($request->tournament_id);
             return view($this->viewPath . '.updateTournament', $this->data);
@@ -135,28 +144,31 @@ class FootballController extends Controller
         }
     }
 
-    public function DeleteTournament(Request $request){
+    public function DeleteTournament(Request $request)
+    {
         $tournament = FootbalTournament::find($request->tournament_id);
         $tournament->delete();
         return redirect($this->viewPath . '/Tournaments')->with('success', 'Tournament deleted successfully');
     }
 
     #coachers
-    public function GetAllCoachers(){
+    public function GetAllCoachers()
+    {
         $this->data['coaches'] = FootbalCoach::all();
         return view($this->viewPath . '.coachers', $this->data);
     }
 
-    public function CreateCoacher(Request $request){
+    public function CreateCoacher(Request $request)
+    {
         if ($request->isMethod('GET')) {
-            $this->data['teams'] = FootbalTeam::where('coach_id',null)->select('name','id')->get();
+            $this->data['teams'] = FootbalTeam::where('coach_id', null)->select('name', 'id')->get();
             $this->data['courses'] = Course::get();
-            return view($this->viewPath . '.createCoacher',$this->data);
+            return view($this->viewPath . '.createCoacher', $this->data);
         } else {
             $coach = new FootbalCoach();
             $coach->fill($request->all());
             $coach->save();
-            if(!empty($request->input('team_id'))) {
+            if (!empty($request->input('team_id'))) {
                 $team = FootbalTeam::find($request->input('team_id'));
                 $team->coach_id = $coach->id;
                 $team->save();
@@ -172,7 +184,8 @@ class FootballController extends Controller
         }
     }
 
-    public function UpdateCoacher(Request $request){
+    public function UpdateCoacher(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['coach'] = FootbalCoach::find($request->coach_id);
             $this->data['teams'] = FootbalTeam::get();
@@ -182,7 +195,7 @@ class FootballController extends Controller
             $coach = FootbalCoach::find($request->coach_id);
             $coach->fill($request->all());
             $coach->save();
-            if(!empty($request->input('team_id'))) {
+            if (!empty($request->input('team_id'))) {
                 $team = FootbalTeam::find($request->input('team_id'));
                 $team->coach_id = $coach->id;
                 $team->save();
@@ -199,7 +212,8 @@ class FootballController extends Controller
         }
     }
 
-    public function DeleteCoacher(Request $request){
+    public function DeleteCoacher(Request $request)
+    {
         $coach = FootbalCoach::find($request->coach_id);
         $this->delete_file($coach->image);
         $coach->delete();
@@ -207,16 +221,18 @@ class FootballController extends Controller
     }
 
     // Players management  
-    public function GetAllPlayers(){
+    public function GetAllPlayers()
+    {
         $this->data['players'] = FootbalPlayer::all();
         return view($this->viewPath . '.players', $this->data);
     }
 
-    public function CreatePlayers(Request $request){
+    public function CreatePlayers(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['teams'] = FootbalTeam::get();
             $this->data['courses'] = Course::get();
-            return view($this->viewPath . '.createPlayer',$this->data);
+            return view($this->viewPath . '.createPlayer', $this->data);
         } else {
             $player = new FootbalPlayer();
             $player->fill($request->all());
@@ -231,11 +247,12 @@ class FootballController extends Controller
                 $player->photo = $filename;
                 $player->save();
             }
-            return redirect($this->viewPath.'/Players')->with('success', 'Player created successfully');
+            return redirect($this->viewPath . '/Players')->with('success', 'Player created successfully');
         }
     }
 
-    public function UpdatePlayers(Request $request){
+    public function UpdatePlayers(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['player'] = FootbalPlayer::find($request->player_id);
             $this->data['teams'] = FootbalTeam::get();
@@ -256,34 +273,38 @@ class FootballController extends Controller
                 $player->photo = $filename;
                 $player->save();
             }
-            return redirect($this->viewPath.'/Players')->with('success', 'Player updated successfully');
+            return redirect($this->viewPath . '/Players')->with('success', 'Player updated successfully');
         }
     }
 
-    public function DeletePlayers(Request $request){
+    public function DeletePlayers(Request $request)
+    {
         $player = FootbalPlayer::find($request->player_id);
         $this->delete_file($player->photo);
         $player->delete();
-        return redirect($this->viewPath.'/Players')->with('success', 'Player deleted successfully');
+        return redirect($this->viewPath . '/Players')->with('success', 'Player deleted successfully');
     }
 
-      // Fixtures management  
-    public function GetTeamFixtures(){
+    // Fixtures management  
+    public function GetTeamFixtures()
+    {
         $this->data['tournaments'] = FootbalTournament::with('games')->get();
         return view($this->viewPath . '.fixtures', $this->data);
     }
 
-    public function GenerateFixtures(Request $request){
+    public function GenerateFixtures(Request $request)
+    {
         $tournament_id = $request->tournament_id;
         $teams = FootbalTeam::all();
         $fixtures = $this->generateRoundRobinFixtures($teams, $tournament_id);
         foreach ($fixtures as $fixture) {
             FootbalGames::create($fixture);
         }
-        return redirect('football/Fixtures')->with('success', 'Fixtures generated successfully');
+        return redirect($this->viewPath . '/Fixtures')->with('success', 'Fixtures generated successfully');
     }
 
-    private function generateRoundRobinFixtures($teams, $tournament_id) {
+    private function generateRoundRobinFixtures($teams, $tournament_id)
+    {
         $fixtures = [];
         $teamCount = count($teams);
         $teams = $teams->toArray(); // Convert collection to array
@@ -312,10 +333,11 @@ class FootballController extends Controller
         return $fixtures;
     }
 
-    private function getUsedSlots() {
+    private function getUsedSlots()
+    {
         $games = FootbalGames::all(['venue_id', 'date', 'start_time']);
         $slots = [];
-    
+
         foreach ($games as $game) {
             $venue_id = (string) $game->venue_id;  // Cast to string to ensure it's a valid array key
             $date = $game->date instanceof Carbon ? $game->date->toDateString() : $game->date;
@@ -324,13 +346,14 @@ class FootballController extends Controller
 
             $slots[$venue_id][$date][$start_time] = true;
         }
-    
+
         return $slots;
     }
-    
-    
 
-    private function findAvailableTimeSlot($venue_id, &$usedSlots) {
+
+
+    private function findAvailableTimeSlot($venue_id, &$usedSlots)
+    {
         $date = Carbon::today();
         $startTime = Carbon::createFromTime(10, 0, 0); // Starting at 10:00 AM
         $endTime = Carbon::createFromTime(16, 0, 0); // Up to 4:00 PM
@@ -349,7 +372,8 @@ class FootballController extends Controller
         }
     }
 
-    private function createFixtureArray($homeTeamId, $awayTeamId, $tournamentId, $dateTime, $venueId) {
+    private function createFixtureArray($homeTeamId, $awayTeamId, $tournamentId, $dateTime, $venueId)
+    {
         return [
             'home_team_id' => $homeTeamId,
             'away_team_id' => $awayTeamId,
@@ -362,12 +386,14 @@ class FootballController extends Controller
 
 
     // Tournament Statistics management  
-    public function GetAllTournamentsStatistics(){
+    public function GetAllTournamentsStatistics()
+    {
         $this->data['statistics'] = FootbalTournamentStatistics::with(['tournament', 'team', 'game'])->get();
         return view($this->viewPath . '.statistics', $this->data);
     }
 
-    public function CreateStatistics(Request $request){
+    public function CreateStatistics(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['tournaments'] = FootbalTournament::all();
             $this->data['teams'] = FootbalTeam::all();
@@ -377,11 +403,12 @@ class FootballController extends Controller
             $statistics = new FootbalTournamentStatistics();
             $statistics->fill($request->all());
             $statistics->save();
-            return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics created successfully');
+            return redirect($this->viewPath . '/Team/Statistics')->with('success', 'Statistics created successfully');
         }
     }
 
-    public function UpdateStatistics(Request $request){
+    public function UpdateStatistics(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['statistics'] = FootbalTournamentStatistics::find($request->statistics_id);
             $this->data['tournaments'] = FootbalTournament::all();
@@ -392,23 +419,26 @@ class FootballController extends Controller
             $statistics = FootbalTournamentStatistics::find($request->statistics_id);
             $statistics->fill($request->all());
             $statistics->save();
-            return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics updated successfully');
+            return redirect($this->viewPath . '/Team/Statistics')->with('success', 'Statistics updated successfully');
         }
     }
 
-    public function DeleteStatistics(Request $request){
+    public function DeleteStatistics(Request $request)
+    {
         $statistics = FootbalTournamentStatistics::find($request->statistics_id);
         $statistics->delete();
-        return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics deleted successfully');
+        return redirect($this->viewPath . '/Team/Statistics')->with('success', 'Statistics deleted successfully');
     }
 
     // Player Statistics management  
-    public function GetAllTournamentsPlayerStatistics(){
+    public function GetAllTournamentsPlayerStatistics()
+    {
         $this->data['playerStatistics'] = FootbalTournamentPlayerStatistics::with(['tournament', 'player', 'game'])->get();
         return view($this->viewPath . '.playerStatistics', $this->data);
     }
 
-    public function CreatePlayerStatistics(Request $request){
+    public function CreatePlayerStatistics(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['tournaments'] = FootbalTournament::all();
             $this->data['players'] = FootbalPlayer::all();
@@ -418,11 +448,12 @@ class FootballController extends Controller
             $playerStatistics = new FootbalTournamentPlayerStatistics();
             $playerStatistics->fill($request->all());
             $playerStatistics->save();
-            return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics created successfully');
+            return redirect($this->viewPath . '/Player/Statistics')->with('success', 'Player Statistics created successfully');
         }
     }
 
-    public function UpdatePlayerStatistics(Request $request){
+    public function UpdatePlayerStatistics(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['playerStatistics'] = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
             $this->data['tournaments'] = FootbalTournament::all();
@@ -433,34 +464,38 @@ class FootballController extends Controller
             $playerStatistics = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
             $playerStatistics->fill($request->all());
             $playerStatistics->save();
-            return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics updated successfully');
+            return redirect($this->viewPath . '/Player/Statistics')->with('success', 'Player Statistics updated successfully');
         }
     }
 
-    public function DeletePlayerStatistics(Request $request){
+    public function DeletePlayerStatistics(Request $request)
+    {
         $playerStatistics = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
         $playerStatistics->delete();
-        return redirect($this->viewPath.'/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
+        return redirect($this->viewPath . '/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
     }
 
-     // Venues management  
-     public function getAllStadium(){
+    // Venues management  
+    public function getAllStadium()
+    {
         $this->data['stadiums'] = FootbalVenues::all();
         return view($this->viewPath . '.stadiums', $this->data);
     }
 
-    public function CreateStadium(Request $request){
+    public function CreateStadium(Request $request)
+    {
         if ($request->isMethod('GET')) {
             return view($this->viewPath . '.createStadium', $this->data);
         } else {
             $stadium = new FootbalVenues();
             $stadium->fill($request->all());
             $stadium->save();
-            return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium created successfully');
+            return redirect($this->viewPath . '/Stadium')->with('success', 'Stadium created successfully');
         }
     }
 
-    public function UpdateStadium(Request $request){
+    public function UpdateStadium(Request $request)
+    {
         if ($request->isMethod('GET')) {
             $this->data['stadium'] = FootbalVenues::find($request->stadium_id);
             return view($this->viewPath . '.updateStadium', $this->data);
@@ -468,13 +503,14 @@ class FootballController extends Controller
             $stadium = FootbalVenues::find($request->stadium_id);
             $stadium->fill($request->all());
             $stadium->save();
-            return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium updated successfully');
+            return redirect($this->viewPath . '/Stadium')->with('success', 'Stadium updated successfully');
         }
     }
 
-    public function DeleteStadium(Request $request){
+    public function DeleteStadium(Request $request)
+    {
         $stadium = FootbalVenues::find($request->stadium_id);
         $stadium->delete();
-        return redirect($this->viewPath.'/Stadium')->with('success', 'Stadium deleted successfully');
+        return redirect($this->viewPath . '/Stadium')->with('success', 'Stadium deleted successfully');
     }
 }
