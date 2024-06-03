@@ -11,4 +11,19 @@ class BasketTournamentStatistics extends Model
     protected $table = 'BasketTournamentStatistics';
     protected $fillable = ['tournament_id','team_id','game_id','goals_scored','goals_conceded','game_status'];
 
+    public function tournament()
+    {
+        return $this->belongsTo(BasketTournament::class, 'tournament_id');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(BasketTeam::class, 'team_id');
+    }
+
+    public function game()
+    {
+        return $this->belongsTo(BasketGames::class, 'game_id');
+    }
+
 }

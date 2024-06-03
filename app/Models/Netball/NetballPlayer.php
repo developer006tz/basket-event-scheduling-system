@@ -11,4 +11,9 @@ class NetballPlayer extends Model
     protected $table = 'NetballPlayer';
 
     protected $fillable = ['team_id','course_id','photo','name','phone','age','email','password'];
+
+    public function playerStatistics()
+    {
+        return $this->hasMany(NetballTournamentPlayerStatistics::class, 'player_id');
+    }
 }

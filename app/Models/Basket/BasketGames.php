@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Basket;
 
-use App\Models\Basket\BasketTeam;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class BasketGames extends Model
 {
@@ -28,6 +27,9 @@ class BasketGames extends Model
     ];
 
    
+ 
+
+
     public function homeTeam()
     {
         return $this->belongsTo(BasketTeam::class, 'home_team_id');
@@ -36,5 +38,17 @@ class BasketGames extends Model
     public function awayTeam()
     {
         return $this->belongsTo(BasketTeam::class, 'away_team_id');
+    }
+
+
+
+    public function tournament()
+    {
+        return $this->belongsTo(BasketTournament::class, 'tournament_id');
+    }
+
+    public function venue()
+    {
+        return $this->belongsTo(BasketVenues::class, 'venue_id');
     }
 }

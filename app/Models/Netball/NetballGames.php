@@ -36,4 +36,16 @@ class NetballGames extends Model
     {
         return $this->belongsTo(NetballTeam::class, 'away_team_id');
     }
+
+
+
+    public function tournament()
+    {
+        return $this->belongsTo(NetballTournament::class, 'tournament_id');
+    }
+
+    public function venue()
+    {
+        return $this->belongsTo(NetballVenues::class, 'venue_id');
+    }
 }

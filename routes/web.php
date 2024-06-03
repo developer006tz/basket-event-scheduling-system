@@ -58,10 +58,93 @@ Route::group(['prefix'=> 'football','middleware'=>'auth'], function ($football) 
     $football->any('Player/Statistics/Update', [FootballController::class,'UpdatePlayerStatistics']);
     $football->get('Player/Statistics/Delete', [FootballController::class,'DeletePlayerStatistics']);
 });
+#TODO NETBALL
+Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
+    $netball->get('/', [NetballController::class, 'NetballDashboard'])->name('home');
+    $netball->get('Teams', [NetballController::class, 'Teams']);
+    $netball->any('Team/Create', [NetballController::class, 'CreateTeam']);
+    $netball->any('Team/Update', [NetballController::class, 'UpdateTeam']);
+    $netball->get('Team/Delete', [NetballController::class,'DeleteTeam']);
 
-Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basket) {
-    $basket->get('/', [BasketController::class, 'BasketballDashboard'])->name('basket');
+    #tournaments
+    $netball->get('Tournaments', [NetballController::class,'GetAllTournaments']);
+    $netball->any('Tournaments/Create', [NetballController::class,'CreateTournament']);
+    $netball->any('Tournaments/Update', [NetballController::class,'UpdateTournament']);
+    $netball->get('Tournaments/Delete', [NetballController::class,'DeleteTournament']);
+
+    #coach
+    $netball->get('Coachers', [NetballController::class,'GetAllCoachers']);
+    $netball->any('Coacher/Create', [NetballController::class,'CreateCoacher']);
+    $netball->any('Coacher/Update', [NetballController::class,'UpdateCoacher']);
+    $netball->get('Coacher/Delete', [NetballController::class,'DeleteCoacher']);
+
+    #players
+    $netball->get('Players', [NetballController::class,'GetAllPlayers']);
+    $netball->any('Players/Create', [NetballController::class,'CreatePlayers']);
+    $netball->any('Players/Update', [NetballController::class,'UpdatePlayers']);
+    $netball->get('Players/Delete', [NetballController::class,'DeleteCoacher']);
+
+    #games (Fixtures)
+    $netball->get('Fixtures', [NetballController::class,'GetTeamFixtures']);
+    $netball->post('Fixtures/Generate', [NetballController::class,'GenerateFixtures']);
+
+    #FootbalTournamentStatistics
+    $netball->get('Team/Statistics', [NetballController::class,'GetAllTournamentsStatistics']);
+    $netball->any('Team/Statistics/Create', [NetballController::class,'CreateStatistics']);
+    $netball->any('Team/Statistics/Update', [NetballController::class,'UpdateStatistics']);
+    $netball->get('Team/Statistics/Delete', [NetballController::class,'DeleteStatistics']);
+
+    #FootbalTournamentPlayerStatistics
+    $netball->get('Player/Statistics', [NetballController::class,'GetAllTournamentsPlayerStatistics']);
+    $netball->any('Player/Statistics/Create', [NetballController::class,'CreatePlayerStatistics']);
+    $netball->any('Player/Statistics/Update', [NetballController::class,'UpdatePlayerStatistics']);
+    $netball->get('Player/Statistics/Delete', [NetballController::class,'DeletePlayerStatistics']);
 });
+
+#TODO BASKETBALL
+Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basketball) {
+    $basketball->get('/', [BasketController::class, 'BasketballDashboard'])->name('home');
+    $basketball->get('Teams', [BasketController::class, 'Teams']);
+    $basketball->any('Team/Create', [BasketController::class, 'CreateTeam']);
+    $basketball->any('Team/Update', [BasketController::class, 'UpdateTeam']);
+    $basketball->get('Team/Delete', [BasketController::class,'DeleteTeam']);
+
+    #tournaments
+    $basketball->get('Tournaments', [BasketController::class,'GetAllTournaments']);
+    $basketball->any('Tournaments/Create', [BasketController::class,'CreateTournament']);
+    $basketball->any('Tournaments/Update', [BasketController::class,'UpdateTournament']);
+    $basketball->get('Tournaments/Delete', [BasketController::class,'DeleteTournament']);
+
+    #coach
+    $basketball->get('Coachers', [BasketController::class,'GetAllCoachers']);
+    $basketball->any('Coacher/Create', [BasketController::class,'CreateCoacher']);
+    $basketball->any('Coacher/Update', [BasketController::class,'UpdateCoacher']);
+    $basketball->get('Coacher/Delete', [BasketController::class,'DeleteCoacher']);
+
+    #players
+    $basketball->get('Players', [BasketController::class,'GetAllPlayers']);
+    $basketball->any('Players/Create', [BasketController::class,'CreatePlayers']);
+    $basketball->any('Players/Update', [BasketController::class,'UpdatePlayers']);
+    $basketball->get('Players/Delete', [BasketController::class,'DeleteCoacher']);
+
+    #games (Fixtures)
+    $basketball->get('Fixtures', [BasketController::class,'GetTeamFixtures']);
+    $basketball->post('Fixtures/Generate', [BasketController::class,'GenerateFixtures']);
+
+    #FootbalTournamentStatistics
+    $basketball->get('Team/Statistics', [BasketController::class,'GetAllTournamentsStatistics']);
+    $basketball->any('Team/Statistics/Create', [BasketController::class,'CreateStatistics']);
+    $basketball->any('Team/Statistics/Update', [BasketController::class,'UpdateStatistics']);
+    $basketball->get('Team/Statistics/Delete', [BasketController::class,'DeleteStatistics']);
+
+    #FootbalTournamentPlayerStatistics
+    $basketball->get('Player/Statistics', [BasketController::class,'GetAllTournamentsPlayerStatistics']);
+    $basketball->any('Player/Statistics/Create', [BasketController::class,'CreatePlayerStatistics']);
+    $basketball->any('Player/Statistics/Update', [BasketController::class,'UpdatePlayerStatistics']);
+    $basketball->get('Player/Statistics/Delete', [BasketController::class,'DeletePlayerStatistics']);
+});
+
+
 
 Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
     $netball->get('/', [NetballController::class, 'netballDashboard'])->name('netball');

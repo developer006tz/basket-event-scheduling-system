@@ -11,4 +11,9 @@ class BasketPlayer extends Model
     protected $table = 'BasketPlayer';
 
     protected $fillable = ['team_id','course_id','photo','name','phone','age','email','password'];
+
+    public function playerStatistics()
+    {
+        return $this->hasMany(BasketTournamentPlayerStatistics::class, 'player_id');
+    }
 }

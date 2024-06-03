@@ -10,4 +10,8 @@ class NetballCoach extends Model
     use HasFactory;
     protected $table = 'NetballCoach';
     protected $fillable = ['name', 'email', 'image', 'phone','course_id','password','team_id'];
+
+    public function team(){
+        return $this->belongsTo(NetballTeam::class);
+    }
 }

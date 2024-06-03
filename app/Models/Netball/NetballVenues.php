@@ -11,4 +11,9 @@ class NetballVenues extends Model
 
     protected $table = 'NetballVenues';
     protected $fillable = ['name','capacity','status'] ;
+
+    public function games()
+    {
+        return $this->hasMany(NetballGames::class, 'venue_id');
+    }
 }
