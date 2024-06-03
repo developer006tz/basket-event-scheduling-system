@@ -276,7 +276,6 @@ class FootballController extends Controller
     public function GenerateFixtures(Request $request){
         $tournament_id = $request->tournament_id;
         $teams = FootbalTeam::all();
-        // Algorithm to generate fixtures
         $fixtures = $this->generateRoundRobinFixtures($teams, $tournament_id);
         foreach ($fixtures as $fixture) {
             FootbalGames::create($fixture);
@@ -288,11 +287,9 @@ class FootballController extends Controller
         $fixtures = [];
         $teamCount = count($teams);
         $teams = $teams->toArray(); // Convert collection to array
-        $gameDays = [];
-        $usedSlots = [];
+        $usedSlots = $this->getUsedSlots(); // Retrieve used slots from database
 
         for ($round = 0; $round < $teamCount - 1; $round++) {
-            $dayOffset = $round * 2; // Spreading games every 2 days
             for ($match = 0; $match < $teamCount / 2; $match++) {
                 $home = ($round + $match) % ($teamCount - 1);
                 $away = ($teamCount - 1 - $match + $round) % ($teamCount - 1);
@@ -301,30 +298,13 @@ class FootballController extends Controller
                     $away = $teamCount - 1;
                 }
 
+                // Ensure the same team is not playing against itself
                 if ($teams[$home]['id'] != $teams[$away]['id']) {
-                    // Home game
-                    $homeTime = $this->findAvailableTimeSlot($teams[$home]['venue_id'], $dayOffset, $usedSlots);
-                    $fixtures[] = [
-                        'home_team_id' => $teams[$home]['id'],
-                        'away_team_id' => $teams[$away]['id'],
-                        'tournament_id' => $tournament_id,
-                        'date' => $homeTime->toDateString(),
-                        'start_time' => $homeTime->format('H:i:s'),
-                        'venue_id' => $teams[$home]['venue_id'],
-                    ];
-                    $usedSlots[$teams[$home]['venue_id']][$homeTime->toDateString()][$homeTime->format('H:i:s')] = true;
-
-                    // Away game
-                    $awayTime = $this->findAvailableTimeSlot($teams[$away]['venue_id'], $dayOffset, $usedSlots);
-                    $fixtures[] = [
-                        'home_team_id' => $teams[$away]['id'],
-                        'away_team_id' => $teams[$home]['id'],
-                        'tournament_id' => $tournament_id,
-                        'date' => $awayTime->toDateString(),
-                        'start_time' => $awayTime->format('H:i:s'),
-                        'venue_id' => $teams[$away]['venue_id'],
-                    ];
-                    $usedSlots[$teams[$away]['venue_id']][$awayTime->toDateString()][$awayTime->format('H:i:s')] = true;
+                    // Schedule for both home and away matches
+                    $homeTime = $this->findAvailableTimeSlot($teams[$home]['venue_id'], $usedSlots);
+                    $fixtures[] = $this->createFixtureArray($teams[$home]['id'], $teams[$away]['id'], $tournament_id, $homeTime, $teams[$home]['venue_id']);
+                    $awayTime = $this->findAvailableTimeSlot($teams[$away]['venue_id'], $usedSlots);
+                    $fixtures[] = $this->createFixtureArray($teams[$away]['id'], $teams[$home]['id'], $tournament_id, $awayTime, $teams[$away]['venue_id']);
                 }
             }
         }
@@ -332,19 +312,52 @@ class FootballController extends Controller
         return $fixtures;
     }
 
-    private function findAvailableTimeSlot($venue_id, $dayOffset, &$usedSlots) {
-        $date = now()->addDays($dayOffset);
-        $startTime = Carbon::createFromTimeString("10:00:00");
-        $endTime = Carbon::createFromTimeString("16:00:00");
+    private function getUsedSlots() {
+        $games = FootbalGames::all(['venue_id', 'date', 'start_time']);
+        $slots = [];
+    
+        foreach ($games as $game) {
+            $venue_id = (string) $game->venue_id;  // Cast to string to ensure it's a valid array key
+            $date = $game->date instanceof Carbon ? $game->date->toDateString() : $game->date;
 
-        while ($startTime->lessThanOrEqualTo($endTime)) {
-            if (empty($usedSlots[$venue_id][$date->toDateString()][$startTime->format('H:i:s')])) {
-                return $startTime;
+            $start_time = $game->start_time instanceof Carbon ? $game->start_time->format('H:i:s') : $game->start_time;
+
+            $slots[$venue_id][$date][$start_time] = true;
+        }
+    
+        return $slots;
+    }
+    
+    
+
+    private function findAvailableTimeSlot($venue_id, &$usedSlots) {
+        $date = Carbon::today();
+        $startTime = Carbon::createFromTime(10, 0, 0); // Starting at 10:00 AM
+        $endTime = Carbon::createFromTime(16, 0, 0); // Up to 4:00 PM
+
+        while (true) {
+            $timeKey = $startTime->format('H:i:s');
+            if (empty($usedSlots[$venue_id][$date->toDateString()][$timeKey])) {
+                $usedSlots[$venue_id][$date->toDateString()][$timeKey] = true; // Mark this slot as used
+                return Carbon::create($date->year, $date->month, $date->day, $startTime->hour, $startTime->minute, $startTime->second);
             }
             $startTime->addHour();
+            if ($startTime->greaterThan($endTime)) {
+                $startTime->setHour(10);
+                $date->addDay(); // Move to the next day if time exceeds 4 PM
+            }
         }
-        // If no slots are available, increment the day and reset the time
-        return $this->findAvailableTimeSlot($venue_id, $dayOffset + 1, $usedSlots);
+    }
+
+    private function createFixtureArray($homeTeamId, $awayTeamId, $tournamentId, $dateTime, $venueId) {
+        return [
+            'home_team_id' => $homeTeamId,
+            'away_team_id' => $awayTeamId,
+            'tournament_id' => $tournamentId,
+            'date' => $dateTime->toDateString(),
+            'start_time' => $dateTime->format('H:i:s'),
+            'venue_id' => $venueId,
+        ];
     }
 
 
