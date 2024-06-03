@@ -8,7 +8,7 @@
                 <h2> Edit Team | {{$team->name}}</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                    <a href="{{ url('football/Teams') }}" class="btn btn-primary">
+                    <a href="{{ url($url.'/Teams') }}" class="btn btn-primary">
                         <i class="icon ion-md-add"></i> Manage teams
                     </a>
             </div>

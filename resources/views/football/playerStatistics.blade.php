@@ -8,7 +8,7 @@
                 <h2>Player Statistics</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                <a href="{{ url('football/Player/Statistics/Create') }}" class="btn btn-primary">
+                <a href="{{ url($url.'/Player/Statistics/Create') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> Create New Player Statistics
                 </a>
             </div>

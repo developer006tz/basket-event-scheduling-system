@@ -13,7 +13,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card bg-primary text-white h-100">
                     <div class="card-body py-5">Teams {{ $teams ?? '0' }}</div>
-                    <a href="{{ url('football/Teams') }}" class="card-footer d-flex link">
+                    <a href="{{ url($url.'/Teams') }}" class="card-footer d-flex link">
                         View Teams
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
@@ -25,7 +25,7 @@
                 <div class="card bg-warning text-dark h-100">
                     <div class="card-body py-5">Players {{ $players ?? '0' }}<sup style="font-size: 20px"></sup>
                     </div>
-                    <a href="{{ url('football/Players') }}" class="card-footer d-flex link">
+                    <a href="{{ url($url.'/Players') }}" class="card-footer d-flex link">
                         View Players
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
@@ -36,7 +36,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card bg-success text-white h-100">
                     <div class="card-body py-5">Coaches {{ $coaches ?? '-' }}</div>
-                    <a href="{{ url('football/Coachers') }}" class="card-footer d-flex link">
+                    <a href="{{ url($url.'/Coachers') }}" class="card-footer d-flex link">
                         View Coaches
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>
@@ -47,7 +47,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card bg-danger text-white h-100">
                     <div class="card-body py-5">Tournaments {{ $tournaments ?? '-' }}</div>
-                    <a href="{{ url('football/Tournaments') }}" class="card-footer d-flex link">
+                    <a href="{{ url($url.'/Tournaments') }}" class="card-footer d-flex link">
                         View Details
                         <span class="ms-auto">
                             <i class="bi bi-chevron-right"></i>

@@ -20,7 +20,7 @@
            <!-- handle form here  -->
            <div class="row">
             <div class="col-sm-6 mx-auto">
-            <form action="{{ url('football/Team/Create') }}" method="POST" enctype="multipart/form-data" >
+            <form action="{{ url($url.'/Team/Create') }}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-group mb-3">
                     <label for="name">Team Name</label>

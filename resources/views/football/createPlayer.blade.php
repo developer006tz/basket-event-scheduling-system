@@ -8,7 +8,7 @@
                 <h2>Add New Player</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                <a href="{{ url('football/Players') }}" class="btn btn-primary">
+                <a href="{{ url($url.'/Players') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> Go to Players List
                 </a>
             </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form action="{{ url('football/Players/Create') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url($url.'/Players/Create') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Player Name</label>

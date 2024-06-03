@@ -13,7 +13,7 @@
     <div class="card my-3">
         <div class="card-body">
         <div class="col-sm-12 ">
-                <form action="{{ url('football/Fixtures/Generate') }}"  method="POST">
+                <form action="{{ url($url.'/Fixtures/Generate') }}"  method="POST">
                     @csrf
                     <div class=" row d-flex flex-row  justify-content-even">
                     <div class="form-group col-sm-6">

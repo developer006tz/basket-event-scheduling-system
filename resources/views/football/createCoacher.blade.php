@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form action="{{ url('football/Coacher/Create') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url($url.'/Coacher/Create') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Coach Name</label>

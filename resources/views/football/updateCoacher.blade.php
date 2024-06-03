@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form method="POST" action="{{ url('football/Coacher/Update') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url($url.'/Coacher/Update') }}" enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
                         <input type="hidden" name="coach_id" value="{{ $coach->id }}">

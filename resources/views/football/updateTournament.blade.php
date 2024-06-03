@@ -20,7 +20,7 @@
             <!-- handle form here  -->
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form method="POST" action="{{ url('football/Tournaments/Update') }}">
+                    <form method="POST" action="{{ url($url.'/Tournaments/Update') }}">
                     @method('PATCH')
                         @csrf
                         <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">

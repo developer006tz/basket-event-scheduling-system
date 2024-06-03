@@ -8,7 +8,7 @@
                 <h2>Update Player</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                <a href="{{ url('football/Players') }}" class="btn btn-primary">
+                <a href="{{ url($url.'/Players') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> Go to Players List
                 </a>
             </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form method="POST" action="{{ url('football/Players/Update') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url($url.'/Players/Update') }}" enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
                         <input type="hidden" name="player_id" value="{{ $player->id }}">

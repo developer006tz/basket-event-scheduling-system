@@ -35,21 +35,21 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="{{ url('football/Tournaments') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Tournaments') }}" class="nav-link px-3">
                   <span class="me-2"><i class="bi bi-person-lines-fill"></i></span>
                   <span>Tournaments</span>
                 </a>
               </li>
 
               <li>
-                <a href="{{ url('football/Teams') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Teams') }}" class="nav-link px-3">
                   <span class="me-2"><i class="bi bi-person-badge-fill"></i>
                   </span>
                   <span>Teams</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url('football/Fixtures') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Fixtures') }}" class="nav-link px-3">
                   <span class="me-2"><i class="fa-solid fa-calendar-days"></i>
                   </span>
                   <span>Fixtures</span>
@@ -57,25 +57,25 @@
               </li>
 
               <li>
-                <a href="{{ url('football/Coachers') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Coachers') }}" class="nav-link px-3">
                   <span class="me-2"><i class="bi bi-people"></i></span>
                   <span>Coaches</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url('football/Players') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Players') }}" class="nav-link px-3">
                   <span class="me-2"><i class="bi bi-people"></i></span>
                   <span>Players</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url('football/Team/Statistics') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Team/Statistics') }}" class="nav-link px-3">
                   <span class="me-2"><i class="fa-solid fa-futbol"></i></span>
                   <span>Team Statistics</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url('football/Player/Statistics') }}" class="nav-link px-3">
+                <a href="{{ url($url.'/Player/Statistics') }}" class="nav-link px-3">
                   <span class="me-2"><i class="fa-solid fa-futbol"></i></span>
                   <span>Player Statistics</span>
                 </a>

@@ -8,7 +8,7 @@
                 <h2>Players</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                <a href="{{ url('football/Players/Create') }}" class="btn btn-primary">
+                <a href="{{ url($url.'/Players/Create') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> Create New Player
                 </a>
             </div>

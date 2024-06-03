@@ -20,7 +20,7 @@
             <!-- handle form here  -->
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form action="{{ url('football/Tournaments/Create') }}" method="POST">
+                    <form action="{{ url($url.'/Tournaments/Create') }}" method="POST">
                     @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Tournament Name</label>

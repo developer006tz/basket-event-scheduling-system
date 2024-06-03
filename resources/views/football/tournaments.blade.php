@@ -8,7 +8,7 @@
                 <h2>Tournament</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                    <a href="{{ url('football/Tournaments/Create') }}" class="btn btn-primary">
+                    <a href="{{ url($url.'/Tournaments/Create') }}" class="btn btn-primary">
                         <i class="icon ion-md-add"></i> Create New Tournament
                     </a>
             </div>

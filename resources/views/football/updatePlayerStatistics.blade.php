@@ -8,7 +8,7 @@
                 <h2>Edit Player Statistics</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                <a href="{{ url('football/Player/Statistics') }}" class="btn btn-primary">
+                <a href="{{ url($url.'/Player/Statistics') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> Go to Player Statistics List
                 </a>
             </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form action="{{ url('football/Player/Statistics/Update') }}" method="POST">
+                    <form action="{{ url($url.'/Player/Statistics/Update') }}" method="POST">
                         @csrf
                         <input type="hidden" name="playerStatistics_id" value="{{ $playerStatistics->id }}">
                         <div class="mb-3">

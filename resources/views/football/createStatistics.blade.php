@@ -8,7 +8,7 @@
                 <h2>Add New Statistics</h2>
             </div>
             <div class="col-md-6 text-right d-flex justify-content-end">
-                <a href="{{ url('football/Team/Statistics') }}" class="btn btn-primary">
+                <a href="{{ url($url.'/Team/Statistics') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> Go to Statistics List
                 </a>
             </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
-                    <form action="{{ url('football/Team/Statistics/Create') }}" method="POST">
+                    <form action="{{ url($url.'/Team/Statistics/Create') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="tournament_id" class="form-label">Tournament</label>
