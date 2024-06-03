@@ -15,4 +15,10 @@ class FootbalTournament extends Model
     {
         return $this->hasMany(FootbalGames::class, 'tournament_id');
     }
+
+
+    public function playerStatistics()
+    {
+        return $this->hasMany(FootbalTournamentPlayerStatistics::class, 'tournament_id');
+    }
 }

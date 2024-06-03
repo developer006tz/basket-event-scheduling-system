@@ -9,6 +9,7 @@ use App\Models\Footbal\FootbalGames;
 use App\Models\Footbal\FootbalPlayer;
 use App\Models\Footbal\FootbalTeam;
 use App\Models\Footbal\FootbalTournament;
+use App\Models\Footbal\FootbalTournamentPlayerStatistics;
 use App\Models\Footbal\FootbalTournamentStatistics;
 use App\Models\Footbal\FootbalVenues;
 use Illuminate\Http\Request;
@@ -360,5 +361,46 @@ class FootballController extends Controller
         $statistics = FootbalTournamentStatistics::find($request->statistics_id);
         $statistics->delete();
         return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics deleted successfully');
+    }
+
+    // Player Statistics management  
+    public function GetAllTournamentsPlayerStatistics(){
+        $this->data['playerStatistics'] = FootbalTournamentPlayerStatistics::with(['tournament', 'player', 'game'])->get();
+        return view($this->viewPath . '.playerStatistics', $this->data);
+    }
+
+    public function CreatePlayerStatistics(Request $request){
+        if ($request->isMethod('GET')) {
+            $this->data['tournaments'] = FootbalTournament::all();
+            $this->data['players'] = FootbalPlayer::all();
+            $this->data['games'] = FootbalGames::all();
+            return view($this->viewPath . '.createPlayerStatistics', $this->data);
+        } else {
+            $playerStatistics = new FootbalTournamentPlayerStatistics();
+            $playerStatistics->fill($request->all());
+            $playerStatistics->save();
+            return redirect('football/Player/Statistics')->with('success', 'Player Statistics created successfully');
+        }
+    }
+
+    public function UpdatePlayerStatistics(Request $request){
+        if ($request->isMethod('GET')) {
+            $this->data['playerStatistics'] = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
+            $this->data['tournaments'] = FootbalTournament::all();
+            $this->data['players'] = FootbalPlayer::all();
+            $this->data['games'] = FootbalGames::all();
+            return view($this->viewPath . '.updatePlayerStatistics', $this->data);
+        } else {
+            $playerStatistics = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
+            $playerStatistics->fill($request->all());
+            $playerStatistics->save();
+            return redirect('football/Player/Statistics')->with('success', 'Player Statistics updated successfully');
+        }
+    }
+
+    public function DeletePlayerStatistics(Request $request){
+        $playerStatistics = FootbalTournamentPlayerStatistics::find($request->playerStatistics_id);
+        $playerStatistics->delete();
+        return redirect('football/Player/Statistics')->with('success', 'Player Statistics deleted successfully');
     }
 }

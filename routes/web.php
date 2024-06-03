@@ -51,6 +51,12 @@ Route::group(['prefix'=> 'football','middleware'=>'auth'], function ($football) 
     $football->any('Team/Statistics/Create', [FootballController::class,'CreateStatistics']);
     $football->any('Team/Statistics/Update', [FootballController::class,'UpdateStatistics']);
     $football->get('Team/Statistics/Delete', [FootballController::class,'DeleteStatistics']);
+
+    #FootbalTournamentPlayerStatistics
+    $football->get('Player/Statistics', [FootballController::class,'GetAllTournamentsPlayerStatistics']);
+    $football->any('Player/Statistics/Create', [FootballController::class,'CreatePlayerStatistics']);
+    $football->any('Player/Statistics/Update', [FootballController::class,'UpdatePlayerStatistics']);
+    $football->get('Player/Statistics/Delete', [FootballController::class,'DeletePlayerStatistics']);
 });
 
 Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basket) {

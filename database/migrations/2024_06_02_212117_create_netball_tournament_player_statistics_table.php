@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tournament_id');
             $table->unsignedBigInteger('player_id');
+            $table->unsignedBigInteger('game_id');
             $table->integer('goals');
             $table->integer('assist');
             $table->integer('yellow_card');
