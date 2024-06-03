@@ -9,6 +9,7 @@ use App\Models\Footbal\FootbalGames;
 use App\Models\Footbal\FootbalPlayer;
 use App\Models\Footbal\FootbalTeam;
 use App\Models\Footbal\FootbalTournament;
+use App\Models\Footbal\FootbalTournamentStatistics;
 use App\Models\Footbal\FootbalVenues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -45,6 +46,12 @@ class FootballController extends Controller
            $team  = new FootbalTeam();
            $team->fill($request->all());
            $team->save();
+           
+           if(!empty($request->input('coach_id'))) {
+            $coach = FootbalCoach::find($request->input('coach_id'));
+            $coach->team_id = $team->id;
+            $coach->save();
+           }
            if ($request->hasFile('badge')) {
             $file = $request->file('badge');
             $filename = time() .'.'. $file->extension();
@@ -143,6 +150,11 @@ class FootballController extends Controller
             $coach = new FootbalCoach();
             $coach->fill($request->all());
             $coach->save();
+            if(!empty($request->input('team_id'))) {
+                $team = FootbalTeam::find($request->input('team_id'));
+                $team->coach_id = $coach->id;
+                $team->save();
+            }
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $filename = time() . '.' . $file->extension();
@@ -247,5 +259,106 @@ class FootballController extends Controller
         $this->delete_file($player->photo);
         $player->delete();
         return redirect($this->viewPath.'/Players')->with('success', 'Player deleted successfully');
+    }
+
+     // Fixtures management  
+     public function GetTeamFixtures(){
+        $this->data['tournaments'] = FootbalTournament::with('games')->get();
+        return view($this->viewPath . '.fixtures', $this->data);
+    }
+
+    public function GenerateFixtures(Request $request){
+        $tournament_id = $request->tournament_id;
+        $teams = FootbalTeam::all();
+
+        // Algorithm to generate fixtures
+        $fixtures = $this->generateRoundRobinFixtures($teams, $tournament_id);
+
+        foreach ($fixtures as $fixture) {
+            FootbalGames::create($fixture);
+        }
+
+        return redirect($this->viewPath.'/Fixtures')->with('success', 'Fixtures generated successfully');
+    }
+
+    private function generateRoundRobinFixtures($teams, $tournament_id) {
+        $fixtures = [];
+        $teamCount = count($teams);
+        $teams = $teams->toArray(); // Convert collection to array
+
+        for ($round = 0; $round < $teamCount - 1; $round++) {
+            for ($match = 0; $match < $teamCount / 2; $match++) {
+                $home = ($round + $match) % ($teamCount - 1);
+                $away = ($teamCount - 1 - $match + $round) % ($teamCount - 1);
+
+                if ($match == 0) {
+                    $away = $teamCount - 1;
+                }
+
+                if ($teams[$home]['id'] != $teams[$away]['id']) {
+                    $fixtures[] = [
+                        'home_team_id' => $teams[$home]['id'],
+                        'away_team_id' => $teams[$away]['id'],
+                        'tournament_id' => $tournament_id,
+                        'date' => now()->addDays($round * 7),
+                        'start_time' => '15:00:00',
+                        'venue_id' => $teams[$home]['venue_id'],
+                    ];
+
+                    $fixtures[] = [
+                        'home_team_id' => $teams[$away]['id'],
+                        'away_team_id' => $teams[$home]['id'],
+                        'tournament_id' => $tournament_id,
+                        'date' => now()->addDays($round * 7 + 1),
+                        'start_time' => '15:00:00',
+                        'venue_id' => $teams[$away]['venue_id'],
+                    ];
+                }
+            }
+        }
+
+        return $fixtures;
+    }
+
+
+    // Tournament Statistics management  
+    public function GetAllTournamentsStatistics(){
+        $this->data['statistics'] = FootbalTournamentStatistics::with(['tournament', 'team', 'game'])->get();
+        return view($this->viewPath . '.statistics', $this->data);
+    }
+
+    public function CreateStatistics(Request $request){
+        if ($request->isMethod('GET')) {
+            $this->data['tournaments'] = FootbalTournament::all();
+            $this->data['teams'] = FootbalTeam::all();
+            $this->data['games'] = FootbalGames::all();
+            return view($this->viewPath . '.createStatistics', $this->data);
+        } else {
+            $statistics = new FootbalTournamentStatistics();
+            $statistics->fill($request->all());
+            $statistics->save();
+            return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics created successfully');
+        }
+    }
+
+    public function UpdateStatistics(Request $request){
+        if ($request->isMethod('GET')) {
+            $this->data['statistics'] = FootbalTournamentStatistics::find($request->statistics_id);
+            $this->data['tournaments'] = FootbalTournament::all();
+            $this->data['teams'] = FootbalTeam::all();
+            $this->data['games'] = FootbalGames::all();
+            return view($this->viewPath . '.updateStatistics', $this->data);
+        } else {
+            $statistics = FootbalTournamentStatistics::find($request->statistics_id);
+            $statistics->fill($request->all());
+            $statistics->save();
+            return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics updated successfully');
+        }
+    }
+
+    public function DeleteStatistics(Request $request){
+        $statistics = FootbalTournamentStatistics::find($request->statistics_id);
+        $statistics->delete();
+        return redirect($this->viewPath.'/Team/Statistics')->with('success', 'Statistics deleted successfully');
     }
 }

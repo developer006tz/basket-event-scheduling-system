@@ -48,6 +48,13 @@
                   <span>Teams</span>
                 </a>
               </li>
+              <li>
+                <a href="{{ url('football/Fixtures') }}" class="nav-link px-3">
+                  <span class="me-2"><i class="fa-solid fa-calendar-days"></i>
+                  </span>
+                  <span>Fixtures</span>
+                </a>
+              </li>
 
               <li>
                 <a href="{{ url('football/Coachers') }}" class="nav-link px-3">

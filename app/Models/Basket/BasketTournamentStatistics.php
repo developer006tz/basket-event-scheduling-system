@@ -9,6 +9,6 @@ class BasketTournamentStatistics extends Model
 {
     use HasFactory;
     protected $table = 'BasketTournamentStatistics';
-    protected $fillable = ['tournament_id','team_id','game_id','goals_scored','goals_concerded','game_status'];
+    protected $fillable = ['tournament_id','team_id','game_id','goals_scored','goals_conceded','game_status'];
 
 }

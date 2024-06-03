@@ -36,4 +36,16 @@ class FootbalGames extends Model
     {
         return $this->belongsTo(FootbalTeam::class, 'away_team_id');
     }
+
+
+
+    public function tournament()
+    {
+        return $this->belongsTo(FootbalTournament::class, 'tournament_id');
+    }
+
+    public function venue()
+    {
+        return $this->belongsTo(FootbalVenues::class, 'venue_id');
+    }
 }
