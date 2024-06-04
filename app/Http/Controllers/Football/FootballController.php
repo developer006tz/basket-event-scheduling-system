@@ -279,8 +279,8 @@ class FootballController extends Controller
 
     public function DeletePlayers(Request $request)
     {
-        $player = FootbalPlayer::find($request->player_id);
-        $this->delete_file($player->photo);
+        $player = FootbalPlayer::find(trim($request->player_id));
+        $this->delete_file($player?->photo);
         $player->delete();
         return redirect($this->viewPath . '/Players')->with('success', 'Player deleted successfully');
     }
