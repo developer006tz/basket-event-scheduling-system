@@ -40,7 +40,7 @@ Route::group(['prefix'=> 'football','middleware'=>'auth'], function ($football) 
     $football->get('Players', [FootballController::class,'GetAllPlayers']);
     $football->any('Players/Create', [FootballController::class,'CreatePlayers']);
     $football->any('Players/Update', [FootballController::class,'UpdatePlayers']);
-    $football->get('Players/Delete', [FootballController::class,'DeleteCoacher']);
+    $football->get('Players/Delete', [FootballController::class,'DeletePlayers']);
 
     #games (Fixtures)
     $football->get('Fixtures', [FootballController::class,'GetTeamFixtures']);
@@ -88,7 +88,7 @@ Route::group(['prefix'=> 'netball','middleware'=>'auth'], function ($netball) {
     $netball->get('Players', [NetballController::class,'GetAllPlayers']);
     $netball->any('Players/Create', [NetballController::class,'CreatePlayers']);
     $netball->any('Players/Update', [NetballController::class,'UpdatePlayers']);
-    $netball->get('Players/Delete', [NetballController::class,'DeleteCoacher']);
+    $netball->get('Players/Delete', [NetballController::class,'DeletePlayers']);
 
     #games (Fixtures)
     $netball->get('Fixtures', [NetballController::class,'GetTeamFixtures']);
@@ -137,7 +137,7 @@ Route::group(['prefix'=> 'basketball','middleware'=>'auth'], function ($basketba
     $basketball->get('Players', [BasketController::class,'GetAllPlayers']);
     $basketball->any('Players/Create', [BasketController::class,'CreatePlayers']);
     $basketball->any('Players/Update', [BasketController::class,'UpdatePlayers']);
-    $basketball->get('Players/Delete', [BasketController::class,'DeleteCoacher']);
+    $basketball->get('Players/Delete', [BasketController::class,'DeletePlayers']);
 
     #games (Fixtures)
     $basketball->get('Fixtures', [BasketController::class,'GetTeamFixtures']);
