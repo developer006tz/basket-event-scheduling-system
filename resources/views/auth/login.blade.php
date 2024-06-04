@@ -22,6 +22,7 @@
     font-family: Montserrat;
 }
 
+
 .logo {
     width: 213px;
     height: 36px;
