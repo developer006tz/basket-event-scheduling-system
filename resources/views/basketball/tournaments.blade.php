@@ -44,8 +44,8 @@
                         <td>{{ $tournament->second_winner_award }}</td>
                         <td>{{ $tournament->third_winner_award }}</td>
                         <td class="text-center">
-                            <a href="{{url("football/Tournaments/Update?tournament_id=$tournament->id")}}" class="btn btn-primary">edit</a>
-                            <a href="{{url("football/Tournaments/Delete?tournament_id=$tournament->id")}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Tournament?')">delete</a>                        </td>
+                            <a href="{{url("basketball/Tournaments/Update?tournament_id=$tournament->id")}}" class="btn btn-primary">edit</a>
+                            <a href="{{url("basketball/Tournaments/Delete?tournament_id=$tournament->id")}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Tournament?')">delete</a>                        </td>
                         </tr>
                         @empty 
                         <tr>

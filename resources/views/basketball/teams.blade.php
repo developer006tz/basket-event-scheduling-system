@@ -50,8 +50,8 @@
                             <img src="{{asset("uploads/$team->badge")}}" style="width:100px;height:100px;" alt="team-badge">
                         </td>
                         <td class="text-center">
-                            <a href="{{url("football/Team/Update?team_id=$team->id")}}" class="btn btn-primary">edit</a>
-                            <a href="{{url("football/Team/Delete?team_id=$team->id")}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this team?')">delete</a>                        </td>
+                            <a href="{{url("basketball/Team/Update?team_id=$team->id")}}" class="btn btn-primary">edit</a>
+                            <a href="{{url("basketball/Team/Delete?team_id=$team->id")}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this team?')">delete</a>                        </td>
                         </tr>
                         @empty 
                         <tr>
