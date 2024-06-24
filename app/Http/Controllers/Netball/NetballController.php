@@ -57,6 +57,26 @@ class NetballController extends Controller
             $this->data['venues'] = NetballVenues::select('name', 'id')->get();
             return view($this->viewPath . '.createTeam', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'short_name' => 'nullable|string|max:255',
+                'coach_id' => 'nullable|exists:FootbalCoach,id',
+                'badge' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'venue_id' => 'required|exists:FootbalVenues,id',
+            ], [
+                'name.required' => 'The team name is required.',
+                'short_name.string' => 'The team short name must be a string.',
+                'coach_id.exists' => 'The selected coach is invalid.',
+                'badge.image' => 'The team badge must be an image.',
+                'badge.mimes' => 'The team badge must be a file of type: jpeg, png, jpg, gif, webp.',
+                'venue_id.required' => 'The team venue is required.',
+                'venue_id.exists' => 'The selected venue is invalid.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput();
+            }
+
             $team = new NetballTeam();
             $team->fill($request->all());
             $team->save();
@@ -86,6 +106,24 @@ class NetballController extends Controller
             $this->data['team'] = NetballTeam::find($request->team_id);
             return view($this->viewPath . '.updateTeam', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'short_name' => 'nullable|string|max:255',
+                'coach_id' => 'nullable|exists:FootbalCoach,id',
+                'badge' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'venue_id' => 'required|exists:FootbalVenues,id',
+            ], [
+                'name.required' => 'The team name is required.',
+                'short_name.string' => 'The team short name must be a string.',
+                'coach_id.exists' => 'The selected coach is invalid.',
+                'badge.image' => 'The team badge must be an image.',
+                'badge.mimes' => 'The team badge must be a file of type: jpeg, png, jpg, gif, webp.',
+                'venue_id.required' => 'The team venue is required.',
+                'venue_id.exists' => 'The selected venue is invalid.',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $team = NetballTeam::find($request->team_id);
             $team->fill($request->all());
             $team->save();
@@ -127,6 +165,21 @@ class NetballController extends Controller
         if ($request->isMethod('GET')) {
             return view($this->viewPath . '.createTournament', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'year' => 'required|integer|min:1900|max:' . date('Y'),
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after_or_equal:start_date'
+            ], [
+                'name.required' => 'The tournament name is required.',
+                'year.required' => 'Please specify the year of the tournament.',
+                'start_date.required' => 'The start date is required.',
+                'end_date.required' => 'The end date is required and must be after or on the start date.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $tournament = new NetballTournament();
             $tournament->fill($request->all());
             $tournament->save();
@@ -140,6 +193,21 @@ class NetballController extends Controller
             $this->data['tournament'] = NetballTournament::find($request->tournament_id);
             return view($this->viewPath . '.updateTournament', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'year' => 'required|integer|min:1900|max:' . date('Y'),
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after_or_equal:start_date'
+            ], [
+                'name.required' => 'The tournament name is required.',
+                'year.required' => 'Please specify the year of the tournament.',
+                'start_date.required' => 'The start date is required.',
+                'end_date.required' => 'The end date is required and must be after or on the start date.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $tournament = NetballTournament::find($request->tournament_id);
             $tournament->fill($request->all());
             $tournament->save();
@@ -168,6 +236,26 @@ class NetballController extends Controller
             $this->data['courses'] = Course::get();
             return view($this->viewPath . '.createCoacher', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:FootbalCoach,email',
+                'phone' => 'required|string|max:20',
+                'course_id' => 'nullable|exists:courses,id',
+                'team_id' => 'nullable|exists:FootbalTeam,id',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            ], [
+                'name.required' => 'The coach name is required.',
+                'email.required' => 'The email is required and must be unique.',
+                'phone.required' => 'The phone number is required.',
+                'course_id.exists' => 'The selected course is invalid.',
+                'team_id.exists' => 'The selected team is invalid.',
+                'image.image' => 'The coach image must be an image.',
+                'image.mimes' => 'The coach image must be a file of type: jpeg, png, jpg, gif, webp.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $coach = new NetballCoach();
             $coach->fill($request->all());
             $coach->save();
@@ -195,6 +283,26 @@ class NetballController extends Controller
             $this->data['courses'] = Course::get();
             return view($this->viewPath . '.updateCoacher', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:FootbalCoach,email,' . $request->coach_id,
+                'phone' => 'required|string|max:20',
+                'course_id' => 'nullable|exists:courses,id',
+                'team_id' => 'nullable|exists:FootbalTeam,id',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            ], [
+                'name.required' => 'The coach name is required.',
+                'email.required' => 'The email is required and must be unique.',
+                'phone.required' => 'The phone number is required.',
+                'course_id.exists' => 'The selected course is invalid.',
+                'team_id.exists' => 'The selected team is invalid.',
+                'image.image' => 'The coach image must be an image.',
+                'image.mimes' => 'The coach image must be a file of type: jpeg, png, jpg, gif, webp.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $coach = NetballCoach::find($request->coach_id);
             $coach->fill($request->all());
             $coach->save();
@@ -239,6 +347,26 @@ class NetballController extends Controller
             $this->data['courses'] = Course::get();
             return view($this->viewPath . '.createPlayer', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:FootbalPlayer,email',
+                'phone' => 'required|string|max:20',
+                'age' => 'required|integer|min:1|max:100',
+                'team_id' => 'nullable|exists:FootbalTeam,id',
+                'course_id' => 'nullable|exists:courses,id',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'password' => 'required|string|min:8',
+            ], [
+                'name.required' => 'Player name is required.',
+                'email.required' => 'Email is required and must be unique.',
+                'phone.required' => 'Phone number is required.',
+                'age.required' => 'Age is required.',
+                'password.required' => 'Password is required.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $player = new NetballPlayer();
             $player->fill($request->all());
             if ($request->filled('password')) {
@@ -264,6 +392,26 @@ class NetballController extends Controller
             $this->data['courses'] = Course::get();
             return view($this->viewPath . '.updatePlayer', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:FootbalPlayer,email,' . $request->player_id,
+                'phone' => 'required|string|max:20',
+                'age' => 'required|integer|min:1|max:100',
+                'team_id' => 'nullable|exists:FootbalTeam,id',
+                'course_id' => 'nullable|exists:courses,id',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'password' => 'nullable|string|min:8',
+            ], [
+                'name.required' => 'Player name is required.',
+                'email.required' => 'Email is required and must be unique.',
+                'phone.required' => 'Phone number is required.',
+                'age.required' => 'Age is required.',
+                'password.min' => 'Password must be at least 8 characters.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $player = NetballPlayer::find($request->player_id);
             $player->fill($request->all());
             if ($request->filled('password')) {
@@ -406,6 +554,25 @@ class NetballController extends Controller
             $this->data['games'] = NetballGames::all();
             return view($this->viewPath . '.createStatistics', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'tournament_id' => 'required|exists:FootbalTournament,id',
+                'team_id' => 'required|exists:FootbalTeam,id',
+                'game_id' => 'required|exists:FootbalGames,id',
+                'goals_scored' => 'nullable|integer|min:0',
+                'goals_conceded' => 'nullable|integer|min:0',
+                'game_status' => 'nullable|in:scheduled,ongoing,completed,canceled',
+            ], [
+                'tournament_id.required' => 'Tournament is required.',
+                'team_id.required' => 'Team is required.',
+                'game_id.required' => 'Game is required.',
+                'goals_scored.integer' => 'Goals scored must be an integer.',
+                'goals_conceded.integer' => 'Goals conceded must be an integer.',
+                'game_status.in' => 'Game status must be one of: scheduled, ongoing, completed, canceled.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $statistics = new NetballTournamentStatistics();
             $statistics->fill($request->all());
             $statistics->save();
@@ -422,6 +589,25 @@ class NetballController extends Controller
             $this->data['games'] = NetballGames::all();
             return view($this->viewPath . '.updateStatistics', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'tournament_id' => 'required|exists:FootbalTournament,id',
+                'team_id' => 'required|exists:FootbalTeam,id',
+                'game_id' => 'required|exists:FootbalGames,id',
+                'goals_scored' => 'nullable|integer|min:0',
+                'goals_conceded' => 'nullable|integer|min:0',
+                'game_status' => 'nullable|in:scheduled,ongoing,completed,canceled',
+            ], [
+                'tournament_id.required' => 'Tournament is required.',
+                'team_id.required' => 'Team is required.',
+                'game_id.required' => 'Game is required.',
+                'goals_scored.integer' => 'Goals scored must be an integer.',
+                'goals_conceded.integer' => 'Goals conceded must be an integer.',
+                'game_status.in' => 'Game status must be one of: scheduled, ongoing, completed, canceled.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $statistics = NetballTournamentStatistics::find($request->statistics_id);
             $statistics->fill($request->all());
             $statistics->save();
@@ -451,6 +637,27 @@ class NetballController extends Controller
             $this->data['games'] = NetballGames::all();
             return view($this->viewPath . '.createPlayerStatistics', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'tournament_id' => 'required|exists:FootbalTournament,id',
+                'player_id' => 'required|exists:FootbalPlayer,id',
+                'game_id' => 'required|exists:FootbalGames,id',
+                'goals' => 'required|integer|min:0',
+                'assist' => 'required|integer|min:0',
+                'yellow_card' => 'required|integer|min:0',
+                'red_card' => 'required|integer|min:0',
+            ], [
+                'tournament_id.required' => 'Tournament is required.',
+                'player_id.required' => 'Player is required.',
+                'game_id.required' => 'Game is required.',
+                'goals.required' => 'Goals are required.',
+                'assist.required' => 'Assists are required.',
+                'yellow_card.required' => 'Yellow cards are required.',
+                'red_card.required' => 'Red cards are required.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $playerStatistics = new NetballTournamentPlayerStatistics();
             $playerStatistics->fill($request->all());
             $playerStatistics->save();
@@ -467,6 +674,27 @@ class NetballController extends Controller
             $this->data['games'] = NetballGames::all();
             return view($this->viewPath . '.updatePlayerStatistics', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'tournament_id' => 'required|exists:FootbalTournament,id',
+                'player_id' => 'required|exists:FootbalPlayer,id',
+                'game_id' => 'required|exists:FootbalGames,id',
+                'goals' => 'required|integer|min:0',
+                'assist' => 'required|integer|min:0',
+                'yellow_card' => 'required|integer|min:0',
+                'red_card' => 'required|integer|min:0',
+            ], [
+                'tournament_id.required' => 'Tournament is required.',
+                'player_id.required' => 'Player is required.',
+                'game_id.required' => 'Game is required.',
+                'goals.required' => 'Goals are required.',
+                'assist.required' => 'Assists are required.',
+                'yellow_card.required' => 'Yellow cards are required.',
+                'red_card.required' => 'Red cards are required.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $playerStatistics = NetballTournamentPlayerStatistics::find($request->playerStatistics_id);
             $playerStatistics->fill($request->all());
             $playerStatistics->save();
@@ -493,6 +721,22 @@ class NetballController extends Controller
         if ($request->isMethod('GET')) {
             return view($this->viewPath . '.createStadium', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'capacity' => 'required|integer|min:1',
+                'status' => 'required|in:active,maintenance,unused',
+            ], [
+                'name.required' => 'Stadium name is required.',
+                'capacity.required' => 'Stadium Capacity is required.',
+                'capacity.integer' => 'Capacity must be an integer.',
+                'status.required' => 'Status is required.',
+                'status.in' => 'Status must be one of: active, maintenance, unused.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+                
             $stadium = new NetballVenues();
             $stadium->fill($request->all());
             $stadium->save();
@@ -506,6 +750,20 @@ class NetballController extends Controller
             $this->data['stadium'] = NetballVenues::find($request->stadium_id);
             return view($this->viewPath . '.updateStadium', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'capacity' => 'nullable|integer|min:1',
+                'status' => 'required|in:active,maintenance,unused',
+            ], [
+                'name.required' => 'Stadium name is required.',
+                'capacity.integer' => 'Capacity must be an integer.',
+                'status.required' => 'Status is required.',
+                'status.in' => 'Status must be one of: active, maintenance, unused.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $stadium = NetballVenues::find($request->stadium_id);
             $stadium->fill($request->all());
             $stadium->save();
