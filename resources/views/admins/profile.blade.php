@@ -25,11 +25,11 @@
                         <input type="hidden" name="admin_id" value="{{ $admin->id }}">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>

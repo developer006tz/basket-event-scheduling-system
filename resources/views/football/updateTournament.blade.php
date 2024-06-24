@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
             <!-- handle form here  -->
             <div class="row">
@@ -27,27 +30,27 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Tournament Name</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $tournament->name }}" required>
+                                value="{{ $tournament->name }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="year" class="form-label">Year</label>
                             <input type="number" class="form-control" id="year" name="year"
-                                value="{{ $tournament->year }}" required>
+                                value="{{ $tournament->year }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="start_date" class="form-label">Start Date</label>
                             <input type="date" class="form-control" id="start_date" name="start_date"
-                                value="{{ $tournament->start_date ?? '' }}" required>
+                                value="{{ $tournament->start_date ?? '' }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="end_date" class="form-label">End Date</label>
                             <input type="date" class="form-control" id="end_date" name="end_date"
-                                value="{{ $tournament->end_date ?? '' }}" required>
+                                value="{{ $tournament->end_date ?? '' }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="first_winner_award" class="form-label">First Winner Award</label>
                             <input type="text" class="form-control" id="first_winner_award"
-                                name="first_winner_award" value="{{ $tournament->first_winner_award ?? '' }}" required>
+                                name="first_winner_award" value="{{ $tournament->first_winner_award ?? '' }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="second_winner_award" class="form-label">Second Winner Award</label>

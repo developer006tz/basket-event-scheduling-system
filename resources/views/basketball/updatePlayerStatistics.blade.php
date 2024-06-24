@@ -24,7 +24,7 @@
                         <input type="hidden" name="playerStatistics_id" value="{{ $playerStatistics->id }}">
                         <div class="mb-3">
                             <label for="tournament_id" class="form-label">Tournament</label>
-                            <select name="tournament_id" id="tournament_id" class="form-control" required>
+                            <select name="tournament_id" id="tournament_id" class="form-control"  >
                                 @foreach($tournaments as $tournament)
                                     <option value="{{ $tournament->id }}" @if($tournament->id == $playerStatistics->tournament_id) selected @endif>{{ $tournament->name }}</option>
                                 @endforeach
@@ -32,7 +32,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="player_id" class="form-label">Player</label>
-                            <select name="player_id" id="player_id" class="form-control" required>
+                            <select name="player_id" id="player_id" class="form-control"  >
                                 @foreach($players as $player)
                                     <option value="{{ $player->id }}" @if($player->id == $playerStatistics->player_id) selected @endif>{{ $player->name }}</option>
                                 @endforeach
@@ -40,7 +40,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="game_id" class="form-label">Game</label>
-                            <select name="game_id" id="game_id" class="form-control" required>
+                            <select name="game_id" id="game_id" class="form-control"  >
                                 @foreach($games as $game)
                                     <option value="{{ $game->id }}" @if($game->id == $playerStatistics->game_id) selected @endif>{{ $game->homeTeam->name }} vs {{ $game->awayTeam->name }}</option>
                                 @endforeach
@@ -48,19 +48,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="goals" class="form-label">Goals</label>
-                            <input type="number" name="goals" id="goals" class="form-control" value="{{ $playerStatistics->goals }}" required>
+                            <input type="number" name="goals" id="goals" class="form-control" value="{{ $playerStatistics->goals }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="assist" class="form-label">Assists</label>
-                            <input type="number" name="assist" id="assist" class="form-control" value="{{ $playerStatistics->assist }}" required>
+                            <input type="number" name="assist" id="assist" class="form-control" value="{{ $playerStatistics->assist }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="yellow_card" class="form-label">Yellow Cards</label>
-                            <input type="number" name="yellow_card" id="yellow_card" class="form-control" value="{{ $playerStatistics->yellow_card }}" required>
+                            <input type="number" name="yellow_card" id="yellow_card" class="form-control" value="{{ $playerStatistics->yellow_card }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="red_card" class="form-label">Red Cards</label>
-                            <input type="number" name="red_card" id="red_card" class="form-control" value="{{ $playerStatistics->red_card }}" required>
+                            <input type="number" name="red_card" id="red_card" class="form-control" value="{{ $playerStatistics->red_card }}"  >
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>

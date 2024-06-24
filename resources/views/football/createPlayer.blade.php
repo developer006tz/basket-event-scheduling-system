@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
@@ -23,19 +26,19 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Player Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name"  >
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email"  >
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required>
+                            <input type="text" class="form-control" id="phone" name="phone"  >
                         </div>
                         <div class="mb-3">
                             <label for="age" class="form-label">Age</label>
-                            <input type="number" class="form-control" id="age" name="age" required>
+                            <input type="number" class="form-control" id="age" name="age"  >
                         </div>
                         <div class="mb-3">
                             <label for="team_id" class="form-label">Team</label>
@@ -61,7 +64,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password"  >
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>

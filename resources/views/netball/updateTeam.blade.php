@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
            <!-- handle form here  -->
            <div class="row">

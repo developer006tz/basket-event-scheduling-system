@@ -25,7 +25,7 @@
                         <input type="hidden" name="course_id" value="{{ $course->id }}">
                         <div class="mb-3">
                             <label for="name" class="form-label">Course Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $course->name }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $course->name }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="level" class="form-label">Level</label>

@@ -17,7 +17,7 @@
                     @csrf
                     <div class=" row d-flex flex-row  justify-content-even">
                     <div class="form-group col-sm-6">
-                        <select name="tournament_id" class="form-control" required>
+                        <select name="tournament_id" class="form-control"  >
                             <option value="">_select_tournament_</option>
                             @foreach($tournaments as $tournament)
                                 <option value="{{ $tournament->id }}">{{ $tournament->name }}</option>

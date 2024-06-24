@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
@@ -23,7 +26,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="tournament_id" class="form-label">Tournament</label>
-                            <select name="tournament_id" id="tournament_id" class="form-control" required>
+                            <select name="tournament_id" id="tournament_id" class="form-control"  >
                                 @foreach($tournaments as $tournament)
                                     <option value="{{ $tournament->id }}">{{ $tournament->name }}</option>
                                 @endforeach
@@ -31,7 +34,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="team_id" class="form-label">Team</label>
-                            <select name="team_id" id="team_id" class="form-control" required>
+                            <select name="team_id" id="team_id" class="form-control"  >
                                 @foreach($teams as $team)
                                     <option value="{{ $team->id }}">{{ $team->name }}</option>
                                 @endforeach
@@ -39,7 +42,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="game_id" class="form-label">Game</label>
-                            <select name="game_id" id="game_id" class="form-control" required>
+                            <select name="game_id" id="game_id" class="form-control"  >
                                 @foreach($games as $game)
                                     <option value="{{ $game->id }}">{{ $game->homeTeam->name }} vs {{ $game->awayTeam->name }}</option>
                                 @endforeach

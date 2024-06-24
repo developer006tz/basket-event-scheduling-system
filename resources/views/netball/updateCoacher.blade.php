@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
@@ -25,15 +28,15 @@
                         <input type="hidden" name="coach_id" value="{{ $coach->id }}">
                         <div class="mb-3">
                             <label for="name" class="form-label">Coach Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $coach->name }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $coach->name }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $coach->email }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $coach->email }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $coach->phone }}" required>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $coach->phone }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="course_id" class="form-label">Course</label>

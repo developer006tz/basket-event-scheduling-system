@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
@@ -25,7 +28,7 @@
                         <input type="hidden" name="stadium_id" value="{{ $stadium->id }}">
                         <div class="mb-3">
                             <label for="name" class="form-label">Stadium Name</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ $stadium->name }}" required>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ $stadium->name }}"  >
                         </div>
                         <div class="mb-3">
                             <label for="capacity" class="form-label">Capacity</label>
@@ -33,7 +36,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
-                            <select name="status" id="status" class="form-control" required>
+                            <select name="status" id="status" class="form-control"  >
                                 <option value="active" {{ $stadium->status == 'active' ? 'selected' : '' }}>Active</option>
                                 <option value="maintenance" {{ $stadium->status == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
                                 <option value="unused" {{ $stadium->status == 'unused' ? 'selected' : '' }}>Unused</option>

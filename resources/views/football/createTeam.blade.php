@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+        <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
            <!-- handle form here  -->
            <div class="row">
@@ -24,7 +27,7 @@
                 @csrf
                 <div class="form-group mb-3">
                     <label for="name">Team Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name"  >
                 </div>
                 <div class="form-group mb-3">
                     <label for="short_name">Team Short Name</label>

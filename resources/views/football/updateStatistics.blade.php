@@ -16,6 +16,9 @@
     </div>
 
     <div class="card">
+    <div class="card-header">
+            @include('error')
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6 mx-auto">
@@ -25,7 +28,7 @@
                         <input type="hidden" name="statistics_id" value="{{ $statistics->id }}">
                         <div class="mb-3">
                             <label for="tournament_id" class="form-label">Tournament</label>
-                            <select name="tournament_id" id="tournament_id" class="form-control" required>
+                            <select name="tournament_id" id="tournament_id" class="form-control"  >
                                 @foreach($tournaments as $tournament)
                                     <option value="{{ $tournament->id }}" {{ $tournament->id == $statistics->tournament_id ? 'selected' : '' }}>{{ $tournament->name }}</option>
                                 @endforeach
@@ -33,7 +36,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="team_id" class="form-label">Team</label>
-                            <select name="team_id" id="team_id" class="form-control" required>
+                            <select name="team_id" id="team_id" class="form-control"  >
                                 @foreach($teams as $team)
                                     <option value="{{ $team->id }}" {{ $team->id == $statistics->team_id ? 'selected' : '' }}>{{ $team->name }}</option>
                                 @endforeach
@@ -41,7 +44,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="game_id" class="form-label">Game</label>
-                            <select name="game_id" id="game_id" class="form-control" required>
+                            <select name="game_id" id="game_id" class="form-control"  >
                                 @foreach($games as $game)
                                     <option value="{{ $game->id }}" {{ $game->id == $statistics->game_id ? 'selected' : '' }}>{{ $game->homeTeam->name }} vs {{ $game->awayTeam->name }}</option>
                                 @endforeach

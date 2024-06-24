@@ -23,6 +23,7 @@ class FootballController extends Controller
 {
     use JimmyTraits;
     protected $data = [];
+    protected $error = [];
     private $viewPath = 'football';
 
     public function __construct()
@@ -56,6 +57,26 @@ class FootballController extends Controller
             $this->data['venues'] = FootbalVenues::select('name', 'id')->get();
             return view($this->viewPath . '.createTeam', $this->data);
         } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'short_name' => 'nullable|string|max:255',
+                'coach_id' => 'nullable|exists:FootbalCoach,id',
+                'badge' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'venue_id' => 'required|exists:FootbalVenues,id',
+            ], [
+                'name.required' => 'The team name is required.',
+                'short_name.string' => 'The team short name must be a string.',
+                'coach_id.exists' => 'The selected coach is invalid.',
+                'badge.image' => 'The team badge must be an image.',
+                'badge.mimes' => 'The team badge must be a file of type: jpeg, png, jpg, gif, webp.',
+                'venue_id.required' => 'The team venue is required.',
+                'venue_id.exists' => 'The selected venue is invalid.',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInpu();
+            }
+
             $team = new FootbalTeam();
             $team->fill($request->all());
             $team->save();
