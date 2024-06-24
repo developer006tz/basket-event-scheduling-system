@@ -1,5 +1,5 @@
+<!-- create statistics view  -->
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="searchbar mt-0 mb-4">

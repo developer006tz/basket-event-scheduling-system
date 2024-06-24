@@ -1,3 +1,4 @@
+<!-- create player statistics view  -->
 @extends('layouts.app')
 
 @section('content')

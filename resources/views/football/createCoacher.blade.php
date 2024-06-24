@@ -1,3 +1,4 @@
+<!-- create coacher view  -->
 @extends('layouts.app')
 
 @section('content')

@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\JimmyTraits;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+
 
 class NetballController extends Controller
 {
