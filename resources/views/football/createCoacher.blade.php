@@ -38,7 +38,7 @@
                             <input type="text" class="form-control" id="phone" name="phone"  >
                         </div>
                         <div class="mb-3">
-                            <label for="course_id" class="form-label">Course</label>
+                            <label for="course_id" class="form-label">Programme</label>
                             <select name="course_id" class="form-select" id="course_id">
                                 <option value="">__select_Coacher_Course__</option>
                                 @foreach ($courses as $course )
