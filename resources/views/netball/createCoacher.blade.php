@@ -39,13 +39,13 @@
                         <div class="mb-3">
                             <label for="course_id" class="form-label">Programme</label>
                             <select name="course_id" class="form-select" id="course_id">
-                                <option value="">__select_Coacher_Course__</option>
+                                <option value="">__select__</option>
                                 @foreach ($courses as $course )
                                 <option value="{{$course->id}}">{{$course->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="team_id" class="form-label">Team</label>
                             <select name="team_id" class="form-select" id="team_id">
                                 <option value="">__select_Coacher_Team__</option>
@@ -53,7 +53,7 @@
                                 <option value="{{$team->id}}">{{$team->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
                             <input type="file" class="form-control" id="image" name="image">
